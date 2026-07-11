@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "fetchedAt": "2026-07-10",
+    "mode": "READ-ONLY",
+    "status": "NOT_RETRIEVABLE_VIA_MCP",
+    "explanation": "The connected Ecwid MCP server exposes only: check_token_scopes, get_store_profile, list_categories, list_products, get_product, search_products, backup_catalogue (read) + update_product, upload_product_image (write, NOT used). There is NO MCP tool to list or read Ecwid Instant Site static pages (About/Terms/Privacy/Shipping/FAQ). Their HTML content could not be pulled via the API. The task's strict read-only mode forbids browser scraping, so page BODIES are not captured here. Only the known public URLs (from the prior 2026-05-28 storefront audit) are listed below so the Next.js build knows which routes Ecwid owns and must NOT be overlapped."
+  },
+  "knownStaticPages_fromPriorStorefrontAudit": [
+    { "name": "Chi Siamo (About)", "urls": ["https://cannabilla.it/chi-siamo-cannabilla", "https://cannabilla.it/products/pages/about"], "contentBody": "NOT_CAPTURED_VIA_MCP" },
+    { "name": "Termini e Condizioni (Terms)", "urls": ["https://cannabilla.it/products/pages/terms"], "contentBody": "NOT_CAPTURED_VIA_MCP" },
+    { "name": "Privacy / Dati", "urls": ["(privacy/data page — confirm slug in admin)"], "contentBody": "NOT_CAPTURED_VIA_MCP" },
+    { "name": "Spedizioni e Resi (Shipping & Returns)", "urls": ["https://cannabilla.it/shipping-payment"], "contentBody": "NOT_CAPTURED_VIA_MCP" },
+    { "name": "Politica di Reso (Return policy)", "urls": ["https://cannabilla.it/returns"], "contentBody": "NOT_CAPTURED_VIA_MCP" },
+    { "name": "Blog", "urls": ["https://cannabilla.it/blog"], "note": "Blog is modeled as Ecwid categories under root 168032038 (see 01-categories.json). Article bodies not retrievable via MCP." }
+  ],
+  "recommendation": "To capture static-page bodies for the Next.js build, either (a) copy them from the Ecwid admin (Instant Site > Pages), or (b) run a one-off rendered fetch OUTSIDE this read-only task. Do NOT recreate these routes in Next.js — keep them on Ecwid or migrate deliberately (see NEXTJS_HANDOFF.md do-not-overlap routes)."
+}

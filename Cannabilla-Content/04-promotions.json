@@ -1,0 +1,12 @@
+{
+  "_meta": {
+    "fetchedAt": "2026-07-10",
+    "mode": "READ-ONLY",
+    "status": "NOT_RETRIEVABLE_VIA_MCP",
+    "explanation": "The store plan HAS the DISCOUNT_COUPONS, DISCOUNTS and ADVANCED_DISCOUNTS_FEATURE features enabled (see 00-store-profile.json), so coupons/promotions MAY exist. However, the connected Ecwid MCP server exposes NO tool to list discount coupons or promotions (the /discount_coupons REST endpoint is not wrapped). They could not be read via the available read-only tools. Listing coupons was therefore SKIPPED (no capable read tool), not skipped for safety.",
+    "catalogSaleSignal": "Separately, NO product in 02-products-raw.json has a compareToPrice set (0/45). So there are no product-level 'sale' price annotations in the catalog right now, regardless of any cart-level coupons."
+  },
+  "activeCoupons": [],
+  "productLevelSales": [],
+  "recommendation": "If coupon/promotion data is needed for the frontend, pull it from Ecwid admin (Marketing > Discount coupons) or add a read-only wrapper for GET /api/v3/26630034/discount_coupons to the MCP server."
+}

@@ -1,0 +1,54 @@
+{
+  "_meta": {
+    "fetchedAt": "2026-07-10",
+    "source": "mcp__ecwid-cannabilla__get_store_profile (READ-ONLY)",
+    "mode": "READ-ONLY snapshot — nothing modified on the live store"
+  },
+  "storeId": "26630034",
+  "storeName": "Cannabilla",
+  "publicStoreUrl": "https://cannabilla.it/products",
+  "customDomain": "https://cannabilla.it",
+  "currency": "EUR",
+  "weightUnit": "KILOGRAM",
+  "languages": {
+    "defaultLanguage": "it",
+    "enabledLanguages": ["it", "en"],
+    "facebookPreferredLocale": "it_IT"
+  },
+  "company": {
+    "companyName": "Società Biochimica Galloppa srls",
+    "accountName": "Francesco Maria Galloppa",
+    "email": "info@cannabilla.it",
+    "phone": "0736096736",
+    "street": "Via Caccianebbia 10",
+    "city": "Amandola",
+    "stateOrProvinceCode": "FM",
+    "postalCode": "63857",
+    "countryCode": "IT"
+  },
+  "settings": {
+    "storeName": "Cannabilla",
+    "storeUrl": "https://cannabilla.it/products",
+    "whiteLabel": false
+  },
+  "ecwidStorefrontScript": "https://app.ecwid.com/script.js?26630034",
+  "imageCdnBase": "https://d2j6dbq0eux0bg.cloudfront.net/images/26630034/products/",
+  "relevantAccountFeatures": [
+    "GOOGLE_SHOPPING", "FACEBOOK_STORE", "FB_SYNC_PRODUCTS", "INSTAGRAM_SHOPPING", "TIKTOK_SHOPS",
+    "STRIPE_PAYMENTS", "STRIPE_STORED_CREDIT_CARD", "SQUARE_PAYMENTS", "CLOVER_PAY", "PRINTFUL",
+    "GIFT_CARDS", "DISCOUNT_COUPONS", "DISCOUNTS", "ADVANCED_DISCOUNTS_FEATURE", "COMPARE_TO_PRICE",
+    "PRODUCT_REVIEWS_FEATURE", "PRODUCT_DIMENSIONS", "PRODUCT_SUBTITLES_FEATURE", "PRODUCT_RIBBONS_FEATURE",
+    "SEO_FIELDS", "CUSTOM_URL_SLUGS_FOR_CATALOG_PAGES", "CUSTOM_REDIRECTS_FOR_INSTANT_SITES",
+    "MULTILINGUAL_STORE", "CUSTOM_DOMAIN", "STARTERSITE_SITEMAP", "INSTANT_SITE_CUSTOM_JS_CODE",
+    "COST_PRICE_FEATURE", "INVENTORY_TRACKING", "VIDEO_EMBED_IN_GALLERY_FEATURE", "SIZE_CHARTS_FEATURE"
+  ],
+  "_notExposedByMcp": {
+    "paymentMethods": "NOT returned by the MCP get_store_profile tool (trimmed profile). Prior verified-from-storefront: PayPal, PayPal Pay-in-3, Debit/Credit Card via Stripe, offline methods. Apple/Google Pay unconfirmed.",
+    "shippingMethods": "NOT returned by MCP. Prior verified-from-storefront: GLS, Printful (print-on-demand merch), Packlink PRO.",
+    "taxConfig": "NOT returned by MCP. Italy store, EUR. VAT rate and price-inclusivity NOT retrievable via MCP — confirm in Ecwid admin. Product records DO carry a per-product `tax` object (see 02-products-raw.json).",
+    "merchantCenterFeedUrl": "NOT exposed by MCP (configured inside Ecwid admin > Channels > Sell on Google). Prior docs cite Merchant Center account 205141206.",
+    "facebookFeedUrl": "NOT exposed by MCP (configured inside Ecwid admin > Channels > Meta).",
+    "timezone": "NOT returned by the MCP profile tool.",
+    "note": "These are tool-scope limitations, not auth failures. read_store_profile scope IS present. Do not treat as missing store config."
+  }
+}

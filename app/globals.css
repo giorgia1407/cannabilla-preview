@@ -1,77 +1,76 @@
 @import "tailwindcss";
 
 /*
- * DESIGN TOKENS — Tailwind v4 @theme.
- * Enoteca palette extracted + elevated from the Doreca reference:
- *   - Doreca reads as clean white + charcoal text + a mustard-gold commerce
- *     accent (CTAs, prices, sale ribbons). We keep that gold as the action /
- *     price accent, but lead with a deep Italian bordeaux for the brand,
- *     which reads far more "enoteca" (premium wine merchant) than Doreca's
- *     mass-market wholesale yellow-on-white.
- *   - Warm cream background instead of cold grey.
- *   - Warm charcoal text — NEVER pure black (brand rule).
- * Hex choices are documented in /DORECA_ANALYSIS.md.
+ * CANNABILLA — Phase 1a design tokens (Tailwind v4 @theme).
+ *
+ * Visual blend:
+ *   - Antos      → warm, authentic natural cosmetics (mint announcement bar,
+ *                  3-tier header, photo mega-menus, portrait kit tiles).
+ *   - Miamo      → guided commerce (concern grid with white overlaid labels,
+ *                  gamified quiz band, persistent expert widget bottom-left).
+ *   - Medik8     → premium restraint (gold accent used sparingly, generous
+ *                  whitespace, 4px-radius confident CTAs).
+ *
+ * Palette: deep hemp green + cream + warm charcoal + gold accent.
+ * @theme tokens are emitted as CSS variables on :root AND generate the matching
+ * Tailwind utilities (bg-primary, text-primary, border-line …).
  */
 @theme {
-  /* ============================================================
-   * DORECA PALETTE — white background + warm mustard/gold accent.
-   * (Rebrand from the earlier bordeaux identity; no wine-red remains.)
-   * These are the canonical Doreca tokens named per the brief.
-   * ============================================================ */
-  /* ============================================================
-   * CANNABILLA PALETTE — warm botanical: cream ground, deep hemp
-   * green as the brand colour, warm honey-gold as the commerce accent
-   * (CTAs, prices, offers). Natural cosmetics from the Sibillini Mts.
-   * ============================================================ */
-  --color-bg: #faf7f0;            /* warm cream — page background              */
-  --color-surface: #f2ede1;       /* deeper sand — footer/hover/utility        */
-  --color-text: #23281f;          /* warm green-charcoal — text (never black)  */
-  --color-text-muted: #6d7264;    /* muted sage — secondary text, meta         */
-  --color-primary: #c79a3e;       /* honey-gold — ALL CTAs/prices/offers       */
-  --color-primary-hover: #b0862f; /* darker honey on hover                     */
-  --color-yellow-banner: #e7d7a8; /* soft sand — banner block                  */
-  --color-accent-red: #b5603a;    /* terracotta — occasional accent only       */
-  --color-border: #e4dcc9;        /* warm sand card/section borders            */
-  --color-success: #3f7d54;       /* hemp green — verified badges              */
+  /* Primary — deep hemp green (Cannabilla brand green #2D5F2B) */
+  --color-primary: #2d5f2b;
+  --color-primary-dark: #234a22;
+  --color-primary-light: #4e8a4a;
 
-  /* ---- Legacy token aliases ----
-   * The category/product/cart/search/home views reference these names; they are
-   * REPOINTED to the Cannabilla palette so every page reskins automatically. */
-  --color-wine: #2f5d3a;          /* brand HEMP GREEN (headings/nav/links)     */
-  --color-wine-deep: #234a2d;     /* darker green (dark bands)                 */
-  --color-wine-soft: #b0862f;     /* honey (sale-price emphasis)              */
-  --color-gold: #c79a3e;          /* == primary (CTAs, prices, badges)        */
-  --color-gold-deep: #b0862f;     /* == primary-hover                          */
-  --color-gold-soft: #e2c777;     /* light honey — rings, eyebrows             */
-  --color-cream: #faf7f0;         /* == bg (warm cream)                        */
-  --color-cream-deep: #f2ede1;    /* == surface (sand)                         */
-  --color-charcoal: #23281f;      /* == text                                   */
-  --color-charcoal-soft: #6d7264; /* == text-muted                             */
-  --color-line: #e4dcc9;          /* == border                                 */
+  /* Announcement bar — pale mint (Antos) */
+  --color-announcement-bg: #edf3e3;
+  --color-announcement-text: #234a22;
+
+  /* CTA / accent */
+  --color-cta: #2d5f2b;
+  --color-cta-hover: #234a22;
+
+  /* Warm neutrals */
+  --color-bg: #ffffff;
+  --color-surface: #f8f6f0;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b6b6b;
+  --color-border: #e8e6e0;
+
+  /* Gold accent (Medik8 restraint) */
+  --color-accent-gold: #b8935b;
+  --color-accent-gold-soft: #d8c19a;
+
+  /* Trust green (badges) */
+  --color-trust: #2d5f2b;
+
+  /* Semantic */
+  --color-sale: #c4342b;
+  --color-success: #2d5f2b;
+
+  /* Aliases used across components */
+  --color-cream: #f8f6f0;
+  --color-cream-deep: #efece2;
+  --color-charcoal: #1a1a1a;
+  --color-line: #e8e6e0;
 
   /* Fonts — resolved from next/font CSS variables set on <html> */
-  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  /* Display serif (Playfair) + accent serif (Cormorant) — variables are set on
-   * <html> via next/font, so these fall back gracefully. */
   --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-accent: var(--font-cormorant), Georgia, "Times New Roman", serif;
 
-  /* Shadows — warm neutral tones only (Doreca), never a pure-black shadow */
-  --shadow-wine: 0 8px 30px rgba(35, 40, 31, 0.07);
-  --shadow-wine-sm: 0 4px 16px rgba(35, 40, 31, 0.07);
-  --shadow-wine-lg: 0 24px 50px rgba(35, 40, 31, 0.12);
-  --shadow-gold-cta: 0 10px 28px -6px rgba(199, 154, 62, 0.25);
-  /* commerce-named aliases */
-  --shadow-card: 0 4px 16px rgba(35, 40, 31, 0.07);
-  --shadow-cta: 0 10px 28px -6px rgba(199, 154, 62, 0.25);
+  /* Shadows — warm, never pure black */
+  --shadow-soft: 0 4px 16px rgba(26, 26, 26, 0.06);
+  --shadow-card: 0 6px 24px rgba(26, 26, 26, 0.08);
+  --shadow-lg: 0 24px 50px rgba(26, 26, 26, 0.12);
+  --shadow-cta: 0 10px 24px -8px rgba(45, 95, 43, 0.4);
+
+  /* Layout */
+  --header-height: 112px; /* utility bar (40) + main nav (72) */
 }
 
-/* Named gradients used across the page (text + backgrounds). */
 :root {
-  --gradient-wine: linear-gradient(135deg, #234a2d 0%, #2f5d3a 55%, #4a7c59 100%);
-  --gradient-gold: linear-gradient(135deg, #b0862f 0%, #c79a3e 50%, #e2c777 100%);
-  --gradient-hero: linear-gradient(135deg, #234a2d 0%, #2f5d3a 60%, #4a7c59 100%);
+  --gradient-hemp: linear-gradient(135deg, #234a22 0%, #2d5f2b 55%, #4e8a4a 100%);
 }
 
 @layer base {
@@ -79,108 +78,232 @@
     scroll-behavior: smooth;
   }
 
-  /* Enforce the brand body color globally — warm charcoal, never black. */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    color: #23281f;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    font-family: var(--font-body);
     font-weight: 400;
-    background-color: #faf7f0;
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    /* Step 6 — bigger, more readable base */
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
-  /* Every anchored section clears the sticky nav on smooth scroll. */
   section {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 120px;
   }
 
-  ::selection {
-    background-color: #e2c777;
-    color: #23281f;
+  /* Prevent iOS Safari auto-zoom on focus: inputs never below 16px on phones. */
+  @media (max-width: 640px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
   }
 
-  /* ---- Text-overflow safety net ----
-   * Headings wrap instead of overflowing their container. Italian compound
-   * words are ~20% longer than English, so they get a more aggressive break
-   * rule. Kept scoped to headings on purpose: a blanket `:lang(it) button`
-   * font-size override would shrink icon-only buttons and the carefully tuned
-   * demo CTAs, so per-component sizing is used there instead. */
+  /* Step 6 — heavier, more confident heading scale.
+     Fluid clamps go mobile→desktop; component-level text-* utilities still win
+     where a section needs a bespoke size. */
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--color-text);
     overflow-wrap: break-word;
+    font-weight: 700;
+    line-height: 1.15;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 4vw + 1rem, 4rem); /* 40 → 64px */
+  }
+  h2 {
+    font-size: clamp(2rem, 2.5vw + 1rem, 3rem); /* 32 → 48px */
+  }
+  h3 {
+    font-size: clamp(1.5rem, 1.5vw + 0.75rem, 2rem); /* 24 → 32px */
+  }
+  h4 {
+    font-size: clamp(1.25rem, 1vw + 0.75rem, 1.5rem); /* 20 → 24px */
   }
   :lang(it) h1,
   :lang(it) h2,
   :lang(it) h3 {
     overflow-wrap: anywhere;
   }
+
+  ::selection {
+    background-color: var(--color-primary-light);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-gold);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* ---- Confident CTA buttons (Miamo) ---- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 4px;
+    padding: 14px 32px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9375rem; /* 15px (Step 6) */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      transform 0.18s ease,
+      background-color 0.18s ease,
+      color 0.18s ease,
+      box-shadow 0.18s ease;
+    text-align: center;
+  }
+  .btn-primary {
+    background-color: var(--color-cta);
+    color: #fff;
+    box-shadow: var(--shadow-cta);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-cta-hover);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+  .btn-light {
+    background-color: #fff;
+    color: var(--color-primary);
+  }
+  .btn-light:hover {
+    background-color: var(--color-surface);
+    transform: translateY(-2px);
+  }
+  .btn-sm {
+    padding: 10px 20px;
+    font-size: 0.8125rem;
+  }
+  .btn-lg {
+    padding: 17px 40px;
+    font-size: 1rem;
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
 }
 
 @layer utilities {
-  /* ---- Gradient text ---- */
-  .text-gradient-hero,
-  .text-gradient-wine,
-  .text-gradient-gold {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-accent {
+    font-family: var(--font-accent);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .text-gradient-hemp {
+    background-image: var(--gradient-hemp);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
   }
-  .text-gradient-hero {
-    background-image: var(--gradient-hero);
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-  .text-gradient-wine {
-    background-image: var(--gradient-wine);
-  }
-  .text-gradient-gold {
-    background-image: var(--gradient-gold);
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
-  /* ---- Gradient borders (padding-box trick keeps rounded corners) ---- */
-  .grad-border-gold {
-    border: 2px solid transparent;
-    border-radius: 1rem;
-    background-image: linear-gradient(#ffffff, #ffffff), var(--gradient-gold);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+  /* ---- Text on deep-green surfaces ----
+     Apply .on-dark to any wrapper with a deep hemp-green background so all text,
+     links and icons render cream/white — never near-black. Guarded so white CTAs
+     (.btn-light) and light inputs inside keep their own colours. */
+  .on-dark,
+  .on-dark * {
+    color: #f8f6f0;
   }
-  .grad-border-wine {
-    border: 2px solid transparent;
-    border-radius: 1rem;
-    background-image: linear-gradient(#ffffff, #ffffff), var(--gradient-wine);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
+  .on-dark a {
+    color: #f8f6f0;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+  }
+  .on-dark a:hover {
+    color: #ffffff;
+    text-decoration-color: rgba(255, 255, 255, 0.8);
+  }
+  .on-dark svg {
+    color: #f8f6f0;
+  }
+  /* Keep white/light pills readable inside a green wrapper. */
+  .on-dark .btn-light,
+  .on-dark .btn-light *,
+  .on-dark .keep-ink,
+  .on-dark .keep-ink * {
+    color: var(--color-primary);
+  }
+  /* Outline buttons on green: cream text + cream border (avoid green-on-green). */
+  .on-dark .btn-secondary {
+    color: #f8f6f0;
+    border-color: rgba(248, 246, 240, 0.6);
+  }
+  .on-dark .btn-secondary:hover {
+    background-color: #f8f6f0;
+    border-color: #f8f6f0;
+  }
+  .on-dark .btn-secondary:hover,
+  .on-dark .btn-secondary:hover * {
+    color: var(--color-primary);
   }
 
-  /* ---- Section divider ---- */
-  .section-divider {
-    height: 1px;
-    width: 60%;
-    margin-inline: auto;
-    background-image: linear-gradient(
-      90deg,
-      transparent 0%,
-      #e8b923 50%,
-      transparent 100%
+  /* Botanical leaf pattern (subtle) for cream bands */
+  .botanical-pattern {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(45, 95, 43, 0.08) 1px,
+      transparent 0
     );
-    opacity: 0.4;
+    background-size: 28px 28px;
   }
 
-  /* Subtle gold glow reserved for CTA areas only. */
-  .cta-glow {
-    box-shadow:
-      0 0 0 1px rgba(228, 199, 123, 0.5),
-      0 18px 60px rgba(192, 144, 47, 0.2);
-  }
-
-  /* Animated FAQ accordion: grid-template-rows 0fr -> 1fr for a buttery open. */
+  /* Accordion open/close */
   .accordion-grid {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 350ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: grid-template-rows 320ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .accordion-grid[data-open="true"] {
     grid-template-rows: 1fr;
@@ -189,135 +312,85 @@
     overflow: hidden;
   }
 
-  /* ---- Continuous animations ---- */
-  .animate-blob {
-    animation: blobDrift 12s ease-in-out infinite;
+  .animate-float {
+    animation: floatY 4s ease-in-out infinite;
   }
-  .animate-blob-alt {
-    animation: blobDriftAlt 12s ease-in-out infinite;
+  /* Giulia avatar — very subtle pulsing halo (2s). */
+  .animate-giulia-pulse {
+    animation: giuliaPulse 2s ease-in-out infinite;
   }
-  .animate-glow-pulse {
-    animation: glowPulse 8s ease-in-out infinite;
+  .animate-wa-glow {
+    animation: waGlow 2.6s ease-in-out infinite;
   }
-  .animate-shimmer {
-    animation: shimmerSweep 4s ease-in-out infinite;
+  .animate-fade-up {
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  .animate-breathe {
-    animation: breathe 2.4s ease-in-out infinite;
-  }
-  /* Blue "Experience Live Demo" CTA — slightly slower breathing than the green CTA. */
-  .animate-breathe-blue {
-    animation: breathe 2.8s ease-in-out infinite;
-  }
-  /* Dramatic "URGENT" badge — soft opacity pulse to draw the eye. */
-  .animate-urgent-pulse {
-    animation: urgentPulse 1.6s ease-in-out infinite;
-  }
-  .animate-marquee {
-    animation: marqueeScroll 60s linear infinite;
-  }
-  .animate-float-phone {
-    animation: floatPhone 4s ease-in-out infinite;
-  }
-  .animate-order-toast {
-    animation: orderToast 5s ease-in-out infinite;
-  }
-  .cta-ripple {
-    animation: ripple 600ms ease-out forwards;
-  }
-  /* One-time "tap me" affordance on the demo restaurant switcher (mobile). */
-  .animate-tap-hint {
-    animation: tapHint 1.4s ease-out 3;
+  .rotate-item {
     opacity: 0;
+    animation: rotateFade 20s ease-in-out infinite backwards;
   }
 
-  /* ---- Curry & Spice motion utilities ---- */
-  /* Hide the scrollbar on horizontally-scrolling menu category tabs. */
-  .curry-no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  /* ---- Trust marquee (Step 2) — continuous horizontal slide ----
+     Two identical groups sit side by side; translating the track -50% shifts it
+     by exactly one group width for a seamless, gap-free loop. */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-slide 40s linear infinite;
   }
-  .curry-no-scrollbar::-webkit-scrollbar {
-    display: none;
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
-  /* Gentle bounce for the hero scroll-down indicator. */
-  .curry-scroll-bounce {
-    animation: curryScrollBounce 1.8s ease-in-out infinite;
+  @media (max-width: 640px) {
+    .marquee-track {
+      animation-duration: 32s;
+    }
   }
-  /* CSS-only hero entrance — runs on load without waiting for JS/hydration, so
-   * the above-the-fold hero text paints fast (good LCP). Stagger via inline
-   * animation-delay. */
-  .curry-fade-up {
-    animation: curryFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  /* ---- Text-on-photo safety net (Step 5) ----
+     Any element whose text sits directly over a photo gets cream ink + a soft
+     shadow, so a light patch of the image can never swallow the label. */
+  [data-photo-overlay-text] {
+    color: #f8f6f0;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
   }
-  /* Pure-CSS announcement ticker (mobile) — no JS interval overhead. The track
-   * holds two copies of the content and slides by -50% for a seamless loop. */
-  .curry-ticker {
-    animation: curryTicker 24s linear infinite;
+
+  /* ---- Giulia teaser card (Step 3) — bounce-in on auto-popup ---- */
+  .animate-giulia-pop {
+    animation: giuliaPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   }
-  /* Pure-CSS rotating-fade for the mobile announcement bar: four stacked items,
-   * each shown for a 4s slot of a 16s cycle via staggered animation-delay.
-   * `backwards` fill keeps items hidden (0% keyframe) during their delay so they
-   * don't all show stacked at load. */
-  .curry-rotate-item {
-    opacity: 0;
-    animation: curryAnnounceRotate 16s ease-in-out infinite backwards;
-  }
-  /* Rotating fade tuned for exactly 3 announcement items (each visible for a
-   * third of the 12s cycle; stagger via inline animation-delay 0/4/8s). */
-  .enoteca-rotate-3 {
-    opacity: 0;
-    animation: enotecaRotate3 12s ease-in-out infinite backwards;
-  }
-  /* Pulsing gold glow ring on the floating WhatsApp button. */
-  .enoteca-wa-glow {
-    animation: enotecaWaGlow 2.6s ease-in-out infinite;
-  }
-  /* "Bella is typing…" bouncing dots (stagger via inline animation-delay). */
-  .curry-typing-dot {
-    animation: curryTyping 1.2s ease-in-out infinite;
-  }
-  /* Gentle upward bounce for the "tap a star" hint arrow. */
-  .curry-bounce-up {
-    animation: curryBounceUp 1.6s ease-in-out infinite;
+
+  /* ---- Mega-menu panel — fully opaque, elevated, clipped (no bleed-through) ---- */
+  .mega-panel {
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.15),
+      0 2px 8px rgba(0, 0, 0, 0.08);
   }
 }
 
-@keyframes curryBounceUp {
+@keyframes floatY {
   0%,
   100% {
     transform: translateY(0);
-    opacity: 0.5;
   }
   50% {
-    transform: translateY(-6px);
-    opacity: 1;
+    transform: translateY(-10px);
   }
 }
-
-@keyframes enotecaRotate3 {
-  0% {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  2% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  30% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  33% {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
+@keyframes giuliaPulse {
+  0%,
   100% {
-    opacity: 0;
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.15;
   }
 }
-
-@keyframes enotecaWaGlow {
+@keyframes waGlow {
   0%,
   100% {
     box-shadow:
@@ -330,17 +403,27 @@
       0 0 0 12px rgba(37, 211, 102, 0);
   }
 }
-
-@keyframes curryAnnounceRotate {
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 4-item rotating announcement (each visible ~1/4 of a 20s cycle). */
+@keyframes rotateFade {
   0% {
     opacity: 0;
     transform: translateY(4px);
   }
-  3% {
+  2% {
     opacity: 1;
     transform: translateY(0);
   }
-  22% {
+  23% {
     opacity: 1;
     transform: translateY(0);
   }
@@ -353,123 +436,7 @@
   }
 }
 
-@keyframes curryBellaGlow {
-  0%,
-  100% {
-    box-shadow:
-      0 10px 26px -6px rgba(199, 64, 26, 0.55),
-      0 0 0 0 rgba(232, 165, 72, 0.5);
-  }
-  50% {
-    box-shadow:
-      0 12px 32px -4px rgba(199, 64, 26, 0.7),
-      0 0 0 12px rgba(232, 165, 72, 0);
-  }
-}
-
-@keyframes curryTyping {
-  0%,
-  60%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.35;
-  }
-  30% {
-    transform: translateY(-4px);
-    opacity: 1;
-  }
-}
-
-@keyframes curryTicker {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes curryFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes curryScrollBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.85;
-  }
-  50% {
-    transform: translateY(8px);
-    opacity: 0.4;
-  }
-}
-
-@keyframes tapHint {
-  0% {
-    opacity: 0.7;
-    transform: translateY(-50%) scale(1);
-  }
-  70%,
-  100% {
-    opacity: 0;
-    transform: translateY(-50%) scale(1.7);
-  }
-}
-
-@keyframes blobDrift {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(20px, 15px);
-  }
-}
-@keyframes blobDriftAlt {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(-20px, -15px);
-  }
-}
-@keyframes glowPulse {
-  0%,
-  100% {
-    opacity: 0.1;
-  }
-  50% {
-    opacity: 0.18;
-  }
-}
-@keyframes shimmerSweep {
-  0% {
-    transform: translateX(-160%) skewX(-20deg);
-  }
-  60%,
-  100% {
-    transform: translateX(260%) skewX(-20deg);
-  }
-}
-@keyframes breathe {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-}
-@keyframes marqueeScroll {
+@keyframes marquee-slide {
   0% {
     transform: translateX(0);
   }
@@ -477,47 +444,14 @@
     transform: translateX(-50%);
   }
 }
-@keyframes floatPhone {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-@keyframes orderToast {
+@keyframes giuliaPop {
   0% {
     opacity: 0;
-    transform: translateY(-14px);
+    transform: translateY(16px) scale(0.95);
   }
-  6% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  22% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  30%,
   100% {
-    opacity: 0;
-    transform: translateY(-14px);
-  }
-}
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-@keyframes urgentPulse {
-  0%,
-  100% {
-    opacity: 0.85;
-  }
-  50% {
     opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -525,35 +459,30 @@
   html {
     scroll-behavior: auto;
   }
-  .animate-blob,
-  .animate-blob-alt,
-  .animate-glow-pulse,
-  .animate-shimmer,
-  .animate-breathe,
-  .animate-breathe-blue,
-  .animate-urgent-pulse,
-  .animate-marquee,
-  .animate-float-phone,
-  .animate-order-toast,
-  .animate-tap-hint,
-  .curry-scroll-bounce,
-  .curry-fade-up,
-  .curry-ticker,
-  .curry-rotate-item,
-  .curry-bella-glow,
-  .curry-typing-dot,
-  .curry-bounce-up,
-  .enoteca-rotate-3,
-  .enoteca-wa-glow {
+  .animate-float,
+  .animate-wa-glow,
+  .animate-giulia-pulse,
+  .animate-giulia-pop,
+  .animate-fade-up,
+  .rotate-item {
     animation: none !important;
   }
-  /* With motion reduced, keep only the first announcement item visible. */
-  .curry-rotate-item,
-  .enoteca-rotate-3 {
+  .rotate-item {
     opacity: 0;
   }
-  .curry-rotate-item:first-child,
-  .enoteca-rotate-3:first-child {
+  .rotate-item:first-child {
     opacity: 1;
+  }
+  .btn:hover {
+    transform: none !important;
+  }
+  /* Marquee: stop the slide, center a single static copy of the strip. */
+  .marquee-track {
+    animation: none !important;
+    width: 100%;
+    justify-content: center;
+  }
+  .marquee-track > [data-marquee-group] + [data-marquee-group] {
+    display: none;
   }
 }

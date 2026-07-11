@@ -1,106 +1,124 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { SiteChrome } from "@/components/enoteca/SiteChrome";
-import { ChevronRight } from "@/components/enoteca/Icons";
+import { SiteChrome } from "@/components/chrome/SiteChrome";
+import { Photo } from "@/components/Photo";
+import { Breadcrumb } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
 import { SHOP_INFO, getWhatsAppUrl } from "@/lib/constants";
-
-export const metadata: Metadata = {
-  title: "Contatti — Cannabilla",
-  description:
-    "Dove siamo, orari, telefono e WhatsApp di Cannabilla, cosmetici naturali alla canapa dai Monti Sibillini. Spedizione in tutta Italia.",
-  alternates: { canonical: "/contatti" },
-};
+import { MapPin, Mail, Phone, Clock, MessageCircle } from "lucide-react";
+import { ContactForm } from "./ContactForm";
 
 export const dynamic = "force-static";
 
-const MAPS_EMBED =
-  "https://www.google.com/maps?q=Via%20Caccianebbia%2010%2C%2063857%20Amandola%20FM&output=embed";
+export const metadata: Metadata = {
+  title: "Contatti",
+  description:
+    "Contatta Cannabilla: indirizzo, email, telefono e orari. Scrivici su WhatsApp o compila il modulo per ricevere assistenza.",
+};
 
 export default function ContattiPage() {
   return (
     <SiteChrome>
-      <div className="mx-auto max-w-5xl px-6 py-12 md:py-16">
-        <nav
-          className="flex items-center gap-1.5 text-[12.5px] text-text-muted"
-          aria-label="Breadcrumb"
-        >
-          <Link href="/" className="hover:text-primary-hover">
-            Home
-          </Link>
-          <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-text">Contatti</span>
-        </nav>
+      {/* Hero */}
+      <section className="bg-cream">
+        <div className="mx-auto max-w-[1400px] px-4 py-14 sm:px-6">
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Contatti" }]} />
+          <h1 className="mt-4 font-display text-4xl text-text sm:text-5xl">Contatti</h1>
+          <p className="mt-3 max-w-2xl text-text-muted">
+            Siamo qui per aiutarti a scegliere i prodotti giusti e per rispondere a ogni domanda. Trovi tutti i nostri
+            recapiti qui sotto.
+          </p>
+        </div>
+      </section>
 
-        <h1 className="mt-3 font-[family-name:var(--font-display)] text-[34px] font-bold text-text md:text-[44px]">
-          Contatti
-        </h1>
-        <p className="mt-2 max-w-xl text-[15px] text-text-muted">
-          Scrivici o chiamaci: ti aiutiamo a scegliere il cosmetico giusto per la tua pelle
-          e prepariamo il tuo ordine per la spedizione in tutta Italia.
-        </p>
-
-        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {/* Details */}
-          <div className="space-y-6">
-            <ContactRow label="Indirizzo">
-              {SHOP_INFO.address}
-            </ContactRow>
-            <ContactRow label="Orari">{SHOP_INFO.hours}</ContactRow>
-            <ContactRow label="Telefono negozio">
-              <a href={SHOP_INFO.phoneHref} className="text-text hover:text-primary-hover">
-                {SHOP_INFO.phone}
-              </a>
-            </ContactRow>
-            <ContactRow label="E-mail">
-              <a href={SHOP_INFO.emailHref} className="text-text hover:text-primary-hover">
-                {SHOP_INFO.email}
-              </a>
-            </ContactRow>
-            <ContactRow label="WhatsApp">
-              <a
-                href={getWhatsAppUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-text hover:text-primary-hover"
-              >
-                {SHOP_INFO.whatsapp.display}
-              </a>
-            </ContactRow>
-            <ContactRow label="Consegna">{SHOP_INFO.deliveryZone}</ContactRow>
+      {/* Two-column: info + form */}
+      <section className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6">
+        <div className="grid gap-12 lg:grid-cols-2">
+          {/* Info column */}
+          <Reveal>
+            <h2 className="font-display text-2xl text-text">Dove trovarci</h2>
+            <ul className="mt-6 space-y-5">
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 text-primary">
+                  <MapPin size={20} />
+                </span>
+                <div>
+                  <p className="font-medium text-text">Indirizzo</p>
+                  <p className="text-sm text-text-muted">{SHOP_INFO.address}</p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 text-primary">
+                  <Mail size={20} />
+                </span>
+                <div>
+                  <p className="font-medium text-text">Email</p>
+                  <a href={SHOP_INFO.emailHref} className="text-sm text-text-muted hover:text-primary">
+                    {SHOP_INFO.email}
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 text-primary">
+                  <Phone size={20} />
+                </span>
+                <div>
+                  <p className="font-medium text-text">Telefono</p>
+                  <a href={SHOP_INFO.phoneHref} className="text-sm text-text-muted hover:text-primary">
+                    {SHOP_INFO.phone}
+                  </a>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-0.5 text-primary">
+                  <Clock size={20} />
+                </span>
+                <div>
+                  <p className="font-medium text-text">Orari</p>
+                  <p className="text-sm text-text-muted">{SHOP_INFO.hours}</p>
+                </div>
+              </li>
+            </ul>
 
             <a
               href={getWhatsAppUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-primary px-7 text-[15px] font-semibold text-text transition-colors hover:bg-primary-hover"
+              className="btn btn-primary mt-8 inline-flex"
             >
-              Scrivici su WhatsApp
+              <MessageCircle size={18} /> Scrivici su WhatsApp
             </a>
-          </div>
 
-          {/* Map */}
-          <div className="overflow-hidden rounded-2xl border border-border">
-            <iframe
-              title="Mappa — Cannabilla"
-              src={MAPS_EMBED}
-              width="100%"
-              height="100%"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="block h-[320px] w-full border-0 md:h-full"
-            />
-          </div>
+            {/* Map placeholder */}
+            <div className="relative mt-8 aspect-[16/10] overflow-hidden rounded-2xl border border-border">
+              <Photo
+                imgKey="valley1"
+                alt={`Mappa indicativa della zona di ${SHOP_INFO.address}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-black/25">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-text">
+                  <MapPin size={16} className="text-primary" /> Amandola (FM) — Monti Sibillini
+                </span>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Form column */}
+          <Reveal delay={0.1}>
+            <div className="rounded-2xl border border-border bg-white p-6 sm:p-8">
+              <h2 className="font-display text-2xl text-text">Scrivici un messaggio</h2>
+              <p className="mt-2 text-sm text-text-muted">
+                Compila il modulo e ti risponderemo il prima possibile.
+              </p>
+              <div className="mt-6">
+                <ContactForm />
+              </div>
+            </div>
+          </Reveal>
         </div>
-      </div>
+      </section>
     </SiteChrome>
-  );
-}
-
-function ContactRow({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <p className="text-[12px] font-bold uppercase tracking-wide text-text-muted">{label}</p>
-      <p className="mt-1 text-[16px] text-text">{children}</p>
-    </div>
   );
 }

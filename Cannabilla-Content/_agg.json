@@ -1,0 +1,445 @@
+{
+  "single": [
+    {
+      "name": "Carta Regalo Digitale Cannabilla",
+      "slug": "carta-regalo-digitale-cannabilla"
+    },
+    {
+      "name": "Sunny Kiss",
+      "slug": "sunny-kiss"
+    }
+  ],
+  "top5": [
+    {
+      "name": "Berretto con Risvolto - Logo Cannabilla",
+      "count": 12
+    },
+    {
+      "name": "Berretto - Logo Cannabilla",
+      "count": 11
+    },
+    {
+      "name": "Cappello con Visiera - Logo Cannabilla",
+      "count": 9
+    },
+    {
+      "name": "Tattoo Balm - Balsamo Lenitivo",
+      "count": 9
+    },
+    {
+      "name": "SportCream - Crema Muscolare Lenitiva",
+      "count": 8
+    }
+  ],
+  "withVideo": [],
+  "totalImages": 220,
+  "ingredients": [
+    {
+      "name": "CBD",
+      "benefit": "svolge un’azione calmante e lenitiva, grazie alle proprietà antinfiammatorie e antipruriginose del CBD evidenziate da diversi studi",
+      "usedInCount": 21
+    },
+    {
+      "name": "Vitamina E",
+      "benefit": "antiossidante, contribuisce a proteggere la pelle dall’invecchiamento e dalle aggressioni esterne",
+      "usedInCount": 18
+    },
+    {
+      "name": "Olio di Semi di Canapa",
+      "benefit": "ricco di acidi grassi omega 3 e omega 6, questi hanno un ruolo fondamentale nell'equilibrio delle membrane cellulari. Svolge un'azione emolliente, lenitiva e ricostituisce la barriera cutanea.",
+      "usedInCount": 13
+    },
+    {
+      "name": "Allantoina",
+      "benefit": "idrata la pelle e ammorbidisce la cheratina, la proteina che costituisce buona parte della pelle, aiutando il turn over cellulare svolge quindi una delicata azione esfoliante. Inoltre ha azione astringente e disarrossante, è un ottimo lenitivo. Svolge significativamente un'azione lenitiva e cicatrizzante.",
+      "usedInCount": 10
+    },
+    {
+      "name": "Acido ialuronico",
+      "benefit": "svolge una profonda azione idratante, come una spugna trattiene l'acqua sulla superficie della pelle Niacinamide: nota come Vitamina B3 o Vitamina PP, svolge diverse funzioni a seconda della percentuale inserita nella formulazione. Fino al 2% ha un'azione idratante, tra il 2% e il 4% svolge un'azione antibatterica, lenitiva e sebonormalizzante, ottima per le pelli grasse, tra il 4% e il 5% agisce anche contro le macchie cutanee. Nella crema viso Cannabilla la niacinamide è al 5%",
+      "usedInCount": 7
+    },
+    {
+      "name": "Aloe Vera",
+      "benefit": "è un ottimo idratante, utile in caso di pelle irritata o arrossata, aiuta la pelle a ristabilirsi e dona anche un effetto rinfrescante",
+      "usedInCount": 7
+    },
+    {
+      "name": "Estratto di Camomilla",
+      "benefit": "ha proprietà antipruriginose, cicatrizzanti e disarrossanti, grazie al contenuto di flavonoidi a livello topico svolge un’azione antinfiammatoria.",
+      "usedInCount": 7
+    },
+    {
+      "name": "Estratto di Iperico",
+      "benefit": "particolarmente indicato per pelli secche, ha azione lenitiva e riepitelizzante, svolge un’attività antinfiammatoria grazie alla presenza di iperforina",
+      "usedInCount": 7
+    },
+    {
+      "name": "Estratto di Calendula",
+      "benefit": "grazie al suo contenuto di mucillagini, svolge una specifica azione idratante, emolliente, filmogena e protettiva, inoltre l’estratto oleoso contiene fitosteroli e alcoli triterpenici con azione emolliente e riepitelizzante.",
+      "usedInCount": 5
+    },
+    {
+      "name": "Glicerina vegetale",
+      "benefit": "mantiene la pelle idratata e morbida",
+      "usedInCount": 5
+    },
+    {
+      "name": "Niacinamide",
+      "benefit": "nota come Vitamina B3 o Vitamina PP, svolge diverse funzioni a seconda della percentuale inserita nella formulazione. Fino al 2% ha un'azione idratante, tra il 2% e il 4% svolge un'azione antibatterica, lenitiva e sebonormalizzante, ottima per le pelli grasse, tra il 4% e il 5% agisce anche contro le macchie cutanee. Nella crema viso Cannabilla la niacinamide è al 5%",
+      "usedInCount": 5
+    },
+    {
+      "name": "Bisabololo",
+      "benefit": "attivo calmante, lenitivo e disarrossante, si ottine dall’olio essenziale di camomilla matricaria",
+      "usedInCount": 4
+    },
+    {
+      "name": "Filtri UV",
+      "benefit": "riducono al minimo gli effetti indesiderati della radiazione UV sulla pelle, come eritemi, ustioni, fotosensibilizzazioni, macchie cutanee",
+      "usedInCount": 4
+    },
+    {
+      "name": "Glicerina",
+      "benefit": "mantiene la pelle morbida e idratata",
+      "usedInCount": 4
+    },
+    {
+      "name": "Olio di canapa",
+      "benefit": "ricco di acidi grassi omega 3 e omega 6, questi hanno un ruolo fondamentale nell'equilibrio delle membrane cellulari. Svolge un'azione emolliente, calmante e lenitiva",
+      "usedInCount": 4
+    },
+    {
+      "name": "Olio di Macadamia",
+      "benefit": "ha proprietà emollienti e rigeneranti, perfetto per restituire idratazione e morbidezza alla pelle secca e irritata",
+      "usedInCount": 4
+    },
+    {
+      "name": "Burro di Cacao",
+      "benefit": "ha proprietà emollienti, nutrienti e idratanti. E' in grado di ripristinare il corretto livello di idratazione cutanea",
+      "usedInCount": 3
+    },
+    {
+      "name": "Burro di Mango",
+      "benefit": "ha proprietà emollienti, nutrienti e idratanti. E' in grado di ripristinare il corretto livello di idratazione cutanea",
+      "usedInCount": 3
+    },
+    {
+      "name": "Cera d'api",
+      "benefit": "trattiene l'acqua dalla pelle rivestendola con una pellicola protettiva. Rende le pelli secche e screpolate incredibilmente morbide",
+      "usedInCount": 3
+    },
+    {
+      "name": "Olio di Carota",
+      "benefit": "ricco di betacarotene, vitamina A, e vitamine del gruppo B, PP, E, e D. Mantiene la pelle morbida ed elastica",
+      "usedInCount": 3
+    },
+    {
+      "name": "Olio di Mandorle Dolci",
+      "benefit": "olio in grado di alleviare la secchezza cutanea, svolge un’azione emolliente e lenitiva",
+      "usedInCount": 3
+    },
+    {
+      "name": "Bava di lumaca",
+      "benefit": "è una miscela complessa, costituita da acqua una componente idratante ed umettante data da proteoglicani e glicosamminoglicani, dall'acido ialuronico e dal collagene. Vi è inoltre una componente esfoliante data dall'acido glicolico. La miscela contiene anche elastina e allantoina",
+      "usedInCount": 2
+    },
+    {
+      "name": "Burro di mango, cacao e karitè",
+      "benefit": "hanno proprietà emollienti, nutrienti e idratanti. Sono burri pregiati in grado di ripristinare il corretto livello di idratazione cutanea",
+      "usedInCount": 2
+    },
+    {
+      "name": "Estratto di Iperico dei Monti Sibillini",
+      "benefit": "particolarmente indicato per pelli secche, ha azione lenitiva e riepitelizzante, svolge un’attività antinfiammatoria grazie alla presenza di iperforina",
+      "usedInCount": 2
+    },
+    {
+      "name": "Estratto di Mela Rosa dei Monti Sibillini",
+      "benefit": "la mela rosa è ricca di polifenoli, in particolare flavonoidi derivati della quercetina, catechina e acido clorogenico che hanno proprietà antiossidanti. Grazie alla loro capacità di neutralizzare i radicali liberi, contrastano l'invecchiamento cellulare.",
+      "usedInCount": 2
+    },
+    {
+      "name": "Estratto di rosmarino",
+      "benefit": "contiene antiossidanti che aiutano a combattere la secchezza della pelle rendendola più morbida ed elastica",
+      "usedInCount": 2
+    },
+    {
+      "name": "Lanolina e cera d’api",
+      "benefit": "permettono alla pelle di rimanere sempre idratata, formando una barriera contro l’esterno, svolgono un’azione riparatrice in caso di pelle secca e screpolata",
+      "usedInCount": 2
+    },
+    {
+      "name": "Mentolo",
+      "benefit": "svolge un'azione rinfrescante",
+      "usedInCount": 2
+    },
+    {
+      "name": "Olio di mandorle, vinaccioli",
+      "benefit": "oli in grado di alleviare la secchezza cutanea, svolgono un’azione emolliente e lenitiva",
+      "usedInCount": 2
+    },
+    {
+      "name": "Olio di Vinaccioli e Avocado",
+      "benefit": "oli in grado di alleviare la secchezza cutanea, svolgono un’azione emolliente e lenitiva",
+      "usedInCount": 2
+    },
+    {
+      "name": "Sangue di drago",
+      "benefit": "Una preziosa resina nota nella tradizione per le sue proprietà antiossidanti. Aiuta a proteggere la pelle dagli agenti esterni.",
+      "usedInCount": 2
+    },
+    {
+      "name": "Alcol etilico denaturato",
+      "benefit": "con una parte di acqua l'alcol riesce a penetrare attraverso la parete cellulare all'interno dei batteri dove provoca una denaturazione delle proteine fino alla distruzione del batterio stesso. Nella formula è presente all'80%",
+      "usedInCount": 1
+    },
+    {
+      "name": "Arnica montana",
+      "benefit": "ha proprietà analgesiche, antinfiammatorie e decongestionanti, viene usata contro dolori muscolari e articolari",
+      "usedInCount": 1
+    },
+    {
+      "name": "Burro di karitè",
+      "benefit": "ha proprietà emollienti, nutrienti e idratanti. E' in grado di ripristinare il corretto livello di idratazione cutanea",
+      "usedInCount": 1
+    },
+    {
+      "name": "Burro di Mango, Cacao e Karité",
+      "benefit": "ricchi e nutrienti, aitano a contrastare la secchezza profonda e restituiscono morbidezza",
+      "usedInCount": 1
+    },
+    {
+      "name": "Cheratina vegetale",
+      "benefit": "cheratina vegetale ottenuta da proteine idrolizzate di canapa e riso. Contribuisce alla creazione di un film protettivo e ristrutturante sulla fibra capillare compressa. Possiede spiccate proprietà condizionanti e sostantivanti nei confronti dei capelli. Migliora la districabilità e dona corpo, volume e lucentezza alla capigliatura. Grazie al suo contenuto di mucillagini, svolge una specifica azione idratante, emolliente, filmogena e protettiva, inoltre l'estratto oleoso contiene fitosteroli e alcoli triterpenici con azione emolliente e riepitelizzante",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Altea",
+      "benefit": "nutre e lenisce le pelli sensibili",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Arnica Montana",
+      "benefit": "L'estratto di Arnica montana è noto per le sue proprietà lenitive e rinfrescanti, utili per pelli sensibili e stanche. Ricco di flavonoidi, aiuta a ridurre rossori e favorire il benessere cutaneo. Ideale in formulazioni cosmetiche dolci e non aggressive, sempre nel rispetto della normativa vigente.",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Artiglio del Diavolo",
+      "benefit": "L'estratto di Artiglio del Diavolo è noto nella tradizione erboristica per le sue proprietà lenitive. Se applicato tramite massaggio, contribuisce a donare una sensazione di benessere alle zone interessate.",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Camomilla & Bisabololo",
+      "benefit": "azione calmante e disarrossante",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Carota",
+      "benefit": "ricco di betacarotene, vitamina A, e vitamine del gruppo B, PP, E, e D. Mantiene la pelle morbida ed elastica",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Centella",
+      "benefit": "azione purificante e astringente",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Elicriso",
+      "benefit": "azione astringente e antipruriginosa che allevia rossori e screpolature della pelle",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Malva",
+      "benefit": "svolge un'azione antipruriginosa e astringente, contiene mucillagini che la rendono un ottimo idratante",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Ortica",
+      "benefit": "stimola la microcircolazione del cuoio capelluto, rinforza le radici e regola l’eccesso di sebo per un cuoio capelluto più fresco e pulito.",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Rusco e Centella",
+      "benefit": "la loro azione combinata, applicata tramite massaggio, è ideale per donare una sensazione di leggerezza e tonicità alle gambe.",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di salvia",
+      "benefit": "svolge attività astringente e purificante",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto di Verbasco",
+      "benefit": "chiamato anche tasso barbasso, è noto per le due proprietà addolcenti, antipruriginose e per il trattamento emolliente di pelli secche e screpoalte",
+      "usedInCount": 1
+    },
+    {
+      "name": "Estratto e Olio essenziale di Rosmarino",
+      "benefit": "svolge un'azione antiossidante e migliora il microcircolo del cuoio capelluto",
+      "usedInCount": 1
+    },
+    {
+      "name": "Oli essenziali di tea tree, eucalipto, menta",
+      "benefit": "opportunamente veicolati, possono svolgere azione antisettica e balsamica.",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio di Avocado",
+      "benefit": "restituisce tono ed elasticità alle pelli secche. Olio in grado di alleviare la secchezza cutanea, svolge un’azione emolliente e lenitiva",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio di Jojoba",
+      "benefit": "in realtà non è un olio, ma una cera. Ha una composizione simile a quella del sebo, riesce quindi ad essere assorbito in maniera efficace dalla pelle. Funge da penetration enhancer, riesce cioè a far penetrare meglio gli attivi. Ripara la barriera cutanea, ha un effetto antinfiammatorio, antiossidante e riparatore.",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio di mandorle",
+      "benefit": "è in grado di alleviare la secchezza cutanea, svolge un’azione emolliente e lenitiva",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio di Mandorle dolci e Rosa",
+      "benefit": "oli in grado di alleviare la secchezza cutanea, svolgono un’azione emolliente e lenitiva",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio di mandorle e vinaccioli",
+      "benefit": "oli in grado di alleviare la secchezza cutanea, svolgono un’azione emolliente e lenitiva",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio di Semi di Canapa e CBD",
+      "benefit": "svolgono un'azione lenitiva, calmante e antiossidante",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio essenziale di Eucalipto e Bergamotto",
+      "benefit": "opportunamente veicolati, possono svolgere azione antisettica e balsamica.",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio essenziale di Menta",
+      "benefit": "ha un'azione antipruriginosa e rinfrescante, è utile anche per purificare la pelle e lenire arrossamenti e scottature",
+      "usedInCount": 1
+    },
+    {
+      "name": "Olio essenziale di Rosmarino",
+      "benefit": "ha proprietà purificanti sulla pelle, é un ottimo tonificante per il sistema nervoso e per il corpo in generale. Ha proprietà antiossidanti, antibatteriche, antivirali e antiparassitarie, cui si aggiungono proprietà dermopurificanti, astringenti, deodoranti e tonificanti",
+      "usedInCount": 1
+    },
+    {
+      "name": "Pantenolo",
+      "benefit": "è un umettante, il che significa che attira e trattiene l'umidità nella pelle, aiutando a mantenere la zona tatuata idratata e prevenendo la secchezza, ha anche proprietà lenitive, svolge quindi un effetto calmante sulla pelle, riducendo irritazioni, rossori e prurito che possono verificarsi durante il processo di guarigione del tatuaggio.",
+      "usedInCount": 1
+    },
+    {
+      "name": "Squalano",
+      "benefit": "ha caratteristiche emollienti e idratanti. E' la forma stabile dello squalene, componente del sebo, risulta efficace anche come agente anti-pruriginoso in situazioni di pelle molto secca.",
+      "usedInCount": 1
+    }
+  ],
+  "certCount": {
+    "Cruelty-free": 34,
+    "Senza parabeni": 34,
+    "100% naturale": 20,
+    "Registrato CPNP": 37,
+    "Made in Italy (Monti Sibillini)": 34,
+    "Ingredienti biologici": 1
+  },
+  "concerns": [
+    {
+      "concern": "arrossamenti / rossori",
+      "products": 22
+    },
+    {
+      "concern": "secchezza / pelle secca",
+      "products": 21
+    },
+    {
+      "concern": "irritazioni",
+      "products": 12
+    },
+    {
+      "concern": "pelle grassa / sebo",
+      "products": 12
+    },
+    {
+      "concern": "screpolature",
+      "products": 9
+    },
+    {
+      "concern": "macchie cutanee",
+      "products": 8
+    },
+    {
+      "concern": "pelle sensibile",
+      "products": 8
+    },
+    {
+      "concern": "invecchiamento / rughe",
+      "products": 7
+    },
+    {
+      "concern": "scottature solari",
+      "products": 6
+    },
+    {
+      "concern": "prurito",
+      "products": 4
+    },
+    {
+      "concern": "imperfezioni / acne",
+      "products": 3
+    },
+    {
+      "concern": "psoriasi / desquamazione",
+      "products": 2
+    },
+    {
+      "concern": "disidratazione",
+      "products": 2
+    },
+    {
+      "concern": "dolori muscolari / affaticamento",
+      "products": 1
+    },
+    {
+      "concern": "capelli sfibrati / crespo",
+      "products": 1
+    }
+  ],
+  "phrases": [
+    {
+      "phrase": "Solo per uso esterno",
+      "products": 38
+    },
+    {
+      "phrase": "Registrato nel portale europeo CPNP",
+      "products": 37
+    },
+    {
+      "phrase": "Conforme alle norme nazionali ed europee",
+      "products": 37
+    },
+    {
+      "phrase": "Formulato e prodotto nel cuore dei Monti Sibillini",
+      "products": 34
+    },
+    {
+      "phrase": "Cruelty-free e senza parabeni",
+      "products": 34
+    },
+    {
+      "phrase": "L'eventuale variazione di colore o odore indica la naturalezza degli ingredienti",
+      "products": 31
+    },
+    {
+      "phrase": "A base di Olio di Canapa",
+      "products": 30
+    }
+  ],
+  "productCount": 46,
+  "enabled": 45
+}

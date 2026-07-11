@@ -2,9 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // All product & atmospheric imagery is self-hosted under /public/products.
-    // No remote image hosts (fully standalone preview — no external calls).
-    remotePatterns: [],
+    // Product & atmospheric photos are hot-linked directly from the Ecwid
+    // store's Cloudfront CDN (same URLs/order as cannabilla.it) for preview
+    // parity. Editorial/hero/concern/ingredient imagery uses verified
+    // Unsplash IDs (hot-linked via <Photo> with unoptimized).
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "d2j6dbq0eux0bg.cloudfront.net", pathname: "/**" },
+    ],
   },
 };
 

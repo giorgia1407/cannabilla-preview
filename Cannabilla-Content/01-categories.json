@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "fetchedAt": "2026-07-10",
+    "source": "mcp__ecwid-cannabilla__list_categories (READ-ONLY)",
+    "total": 48,
+    "note": "The MCP list_categories tool returns id, name, parentId, productCount, enabled ONLY. Category slug, description HTML, and image URL are NOT exposed by the available MCP tools (no get_category tool). Product records in 02-products-raw.json carry a per-product `categories` array (id/name/ancestorIds) but also no category description/image. Roots: Shop (168031804) = commerce; Blog (168032038) = article-categories (not shopping)."
+  },
+  "roots": [
+    { "id": 168031804, "name": "Shop", "parentId": null, "productCount": 45, "enabled": true },
+    { "id": 168032038, "name": "Blog", "parentId": null, "productCount": 21, "enabled": true }
+  ],
+  "shopCategories": [
+    { "id": 168093539, "name": "VISO", "parentId": 168031804, "productCount": 12, "enabled": true },
+    { "id": 168093540, "name": "SOLARI", "parentId": 168031804, "productCount": 5, "enabled": true },
+    { "id": 168117863, "name": "CAPELLI", "parentId": 168031804, "productCount": 3, "enabled": true },
+    { "id": 168093542, "name": "BENESSERE MUSCOLARE e DERMOCURA", "parentId": 168031804, "productCount": 12, "enabled": true },
+    { "id": 168937320, "name": "DETERGENTI", "parentId": 168031804, "productCount": 3, "enabled": true },
+    { "id": 172904516, "name": "TATTOO-CARE", "parentId": 168031804, "productCount": 2, "enabled": true },
+    { "id": 182395501, "name": "CORPO", "parentId": 168031804, "productCount": 10, "enabled": true },
+    { "id": 182395513, "name": "MELABILLA", "parentId": 168031804, "productCount": 2, "enabled": true },
+    { "id": 180176114, "name": "MERCHANDISING", "parentId": 168031804, "productCount": 6, "enabled": true },
+    { "id": 203178058, "name": "Creme Viso", "parentId": 168093539, "productCount": 3, "enabled": true },
+    { "id": 203178063, "name": "Sieri", "parentId": 168093539, "productCount": 3, "enabled": true },
+    { "id": 203176543, "name": "Detersione", "parentId": 168093539, "productCount": 2, "enabled": true },
+    { "id": 203176544, "name": "Esfoliazione", "parentId": 168093539, "productCount": 1, "enabled": true },
+    { "id": 203198261, "name": "Protezione Solare", "parentId": 168093540, "productCount": 2, "enabled": true },
+    { "id": 203198509, "name": "Doposole", "parentId": 168093540, "productCount": 2, "enabled": true },
+    { "id": 203198510, "name": "Shampoo", "parentId": 168117863, "productCount": 1, "enabled": true },
+    { "id": 203198511, "name": "Olio Capelli", "parentId": 168117863, "productCount": 2, "enabled": true },
+    { "id": 203198262, "name": "Hemp Kiss", "parentId": 168093542, "productCount": 2, "enabled": true },
+    { "id": 203177023, "name": "Crema Corpo", "parentId": 182395501, "productCount": 1, "enabled": true },
+    { "id": 203197760, "name": "Oli Corpo", "parentId": 182395501, "productCount": 3, "enabled": true },
+    { "id": 203198508, "name": "Mani", "parentId": 182395501, "productCount": 3, "enabled": true },
+    { "id": 203197761, "name": "Sport", "parentId": 182395501, "productCount": 1, "enabled": true },
+    { "id": 203198260, "name": "PsorCream", "parentId": 182395501, "productCount": 1, "enabled": true }
+  ],
+  "blogArticleCategories": [
+    { "id": 173181844, "name": "Il sistema endocannabinoide", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 169406104, "name": "Proprietà della canapa", "parentId": 168032038, "productCount": 3, "enabled": true },
+    { "id": 169406102, "name": "I Benefici del CBD sulla pelle", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 178427288, "name": "Estrazione del CBD: eccellenza nella produzione di estratti di canapa", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 168035286, "name": "Conoscere la psoriasi: cause, sintomi e opzioni di trattamento", "parentId": 168032038, "productCount": 1, "enabled": true },
+    { "id": 176686400, "name": "Come prendersi cura delle pelle in inverno", "parentId": 168032038, "productCount": 12, "enabled": true },
+    { "id": 176767632, "name": "Sci e benessere: come proteggere la pelle dal sole e dalla fatica muscolare", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 168031809, "name": "Iperico: il fiore giallo dalle mille proprietà", "parentId": 168032038, "productCount": 3, "enabled": true },
+    { "id": 173232319, "name": "Mela Rosa dei Sibillini: storia, caratteristiche e valorizzazione di un frutto antico", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 168038264, "name": "Sangue di drago: storia e proprietà di una pianta magica", "parentId": 168032038, "productCount": 2, "enabled": true },
+    { "id": 168032049, "name": "L’Arnica, la pianta amica degli sportivi", "parentId": 168032038, "productCount": 2, "enabled": true },
+    { "id": 168031807, "name": "SoHo House Rome: Beauty Made in Italy Brand Aperitivo", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 168031805, "name": "Qual è la differenza tra resina ed estratto di cannabis?", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 169406098, "name": "La canapa e la calvizie secondo l’Intelligenza Artificiale", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 169404357, "name": "Cannabilla al Beauty Istanbul 2022", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 169406101, "name": "Cannabilla al CosmoProf North America 2022", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 178812031, "name": "Longevity Energitic con Fabrizia Corradini", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 179128782, "name": "Seminario- come affrontare il cambio di stagione con le piante officinali", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 179748780, "name": "Naturalia 2025: Benessere, Tradizione e Natura nel Cuore dei Sibillini", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 180202784, "name": "Appplicazioni di estratto di canapa sull'ombelico: funziona davvero?", "parentId": 168032038, "productCount": 4, "enabled": true },
+    { "id": 188248534, "name": "Cannabis efficace per l'insonnia a lungo termine? Uno studio dell'ICL lo conferma.", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 195765512, "name": "Il massaggio incontra i cannabinoidi: evidenze scientifiche e applicazioni pratiche", "parentId": 168032038, "productCount": 0, "enabled": true },
+    { "id": 198243053, "name": "Skincare essenziale: Nature ci dà ragione", "parentId": 168032038, "productCount": 0, "enabled": true }
+  ]
+}

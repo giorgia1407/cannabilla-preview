@@ -1,30 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins, Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
-import { I18nProvider } from "@/components/enoteca/i18n";
-import { CartProvider } from "@/components/enoteca/CartContext";
-import { UIProvider } from "@/components/enoteca/UIContext";
+import { Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
-/** Canonical origin for the preview (demo value — not a live domain). */
 const SITE_URL = "https://cannabilla-preview.local";
 
-// Body / UI sans — Inter (variable, self-hosted via next/font).
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
 
-// Secondary sans — Poppins (self-hosted).
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-poppins",
-});
-
-// Display serif — Playfair for the masthead and headings.
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -33,7 +18,6 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-// Accent serif — Cormorant Garamond for elegant italics.
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -44,14 +28,25 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Cannabilla — Cosmetici Naturali alla Canapa",
+  title: {
+    default: "Cannabilla — Cosmetica Naturale alla Canapa dei Monti Sibillini",
+    template: "%s — Cannabilla",
+  },
   description:
-    "Cannabilla — cosmetici naturali alla canapa dai Monti Sibillini. Viso, corpo, solari, capelli e benessere. Formulati e prodotti in Italia, cruelty-free.",
+    "Cosmetica naturale italiana all'olio di semi di canapa e attivi botanici, nel cuore dei Monti Sibillini. Viso, corpo, solari, capelli e trattamenti. Made in Italy, cruelty-free.",
   alternates: { canonical: "/" },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
-    title: "Cannabilla — Cosmetici Naturali alla Canapa",
+    title: "Cannabilla — Cosmetica Naturale alla Canapa",
     description:
-      "Cosmetici naturali alla canapa dai Monti Sibillini. Formulati e prodotti in Italia, cruelty-free e senza parabeni.",
+      "Cosmetici naturali all'olio di semi di canapa dai Monti Sibillini. Made in Italy, cruelty-free, senza parabeni.",
     type: "website",
     locale: "it_IT",
     url: SITE_URL,
@@ -59,7 +54,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#2D5F2B",
   width: "device-width",
   initialScale: 1,
 };
@@ -69,15 +64,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="it"
       suppressHydrationWarning
-      className={`${inter.variable} ${poppins.variable} ${playfair.variable} ${cormorant.variable}`}
+      className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}
     >
-      <body className="bg-cream font-body antialiased">
-        <I18nProvider>
-          <CartProvider>
-            <UIProvider>{children}</UIProvider>
-          </CartProvider>
-        </I18nProvider>
-      </body>
+      <body className="bg-bg font-body antialiased">{children}</body>
     </html>
   );
 }
