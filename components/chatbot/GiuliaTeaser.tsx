@@ -8,9 +8,10 @@ import { useGiulia } from "@/lib/giulia-context";
 
 /**
  * Teaser Giulia — scheda conversazione COMPATTA (~170-190px, metà della
- * precedente). Appare a ESATTAMENTE 5000ms dal mount. La dismissal è solo in
- * memoria (context) → il popup ricompare a ogni ricarica. Se il nome è già noto
- * (localStorage), salta la domanda del nome e saluta l'utente di ritorno.
+ * precedente). Appare a ESATTAMENTE 3000ms dal mount e resta aperta finché
+ * l'utente non la chiude (nessun auto-hide). La dismissal è solo in memoria
+ * (context) → il popup RICOMPARE a ogni ricarica, anche se chiuso prima. Se il
+ * nome è già noto (localStorage), salta la domanda del nome e saluta di ritorno.
  */
 export function GiuliaTeaser() {
   const {
@@ -26,10 +27,11 @@ export function GiuliaTeaser() {
   const [mounted, setMounted] = useState(false);
   const [input, setInput] = useState("");
 
-  // Appare a esattamente 5000ms dal mount (finché non è stato chiuso in questa sessione).
+  // Appare a esattamente 3000ms dal mount (finché non è stato chiuso in questa sessione).
+  // Nessun timer di auto-hide: una volta comparsa resta finché non si chiude con la ×.
   useEffect(() => {
     if (!showTeaser || isOpen) return;
-    const t = setTimeout(() => setMounted(true), 5000);
+    const t = setTimeout(() => setMounted(true), 3000);
     return () => clearTimeout(t);
   }, [showTeaser, isOpen]);
 
@@ -57,8 +59,10 @@ export function GiuliaTeaser() {
     dismissTeaser();
   }
 
+  // Posizionata SOPRA l'avatar di Giulia con ~8px di gap (avatar: bottom-[76px],
+  // h-14 mobile / 72px desktop → il popup parte appena sopra il suo bordo).
   return (
-    <div className="fixed bottom-40 right-3 z-[55] w-[calc(100vw-24px)] sm:bottom-44 sm:right-5 sm:w-[380px]">
+    <div className="fixed bottom-[140px] right-3 z-[55] w-[calc(100vw-24px)] sm:bottom-[156px] sm:right-5 sm:w-[380px]">
       <div
         className="animate-giulia-pop overflow-hidden rounded-2xl bg-white ring-1 ring-black/5"
         style={{

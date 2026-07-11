@@ -4,14 +4,13 @@ import { getWhatsAppUrl } from "@/lib/constants";
 
 /**
  * Icona WhatsApp flottante — entry point SECONDARIO (Giulia è il primario).
- * Solo icona 44px, verde brand WhatsApp (#25D366), posizionata sopra l'avatar di
- * Giulia con ~12px di gap. Tooltip "Scrivi su WhatsApp" in hover dopo ~500ms.
- * Nascosta sotto i 380px per non competere con Giulia (unico entry point sui
- * viewport molto piccoli).
+ * Solo icona 44px, verde brand WhatsApp (#25D366), ancorata in fondo alla colonna
+ * bottom-right; l'avatar di Giulia le galleggia sopra con ~12px di gap. Tooltip
+ * "Scrivi su WhatsApp" in hover dopo ~500ms.
  */
 export function WhatsAppButton() {
   return (
-    <div className="group fixed bottom-[104px] right-8 z-40 max-[379px]:hidden">
+    <div className="group fixed bottom-5 right-5 z-40">
       {/* tooltip — appare a sinistra dell'icona dopo 500ms di hover */}
       <span
         role="tooltip"
