@@ -1,0 +1,559 @@
+@import "tailwindcss";
+
+/*
+ * DESIGN TOKENS — Tailwind v4 @theme.
+ * Enoteca palette extracted + elevated from the Doreca reference:
+ *   - Doreca reads as clean white + charcoal text + a mustard-gold commerce
+ *     accent (CTAs, prices, sale ribbons). We keep that gold as the action /
+ *     price accent, but lead with a deep Italian bordeaux for the brand,
+ *     which reads far more "enoteca" (premium wine merchant) than Doreca's
+ *     mass-market wholesale yellow-on-white.
+ *   - Warm cream background instead of cold grey.
+ *   - Warm charcoal text — NEVER pure black (brand rule).
+ * Hex choices are documented in /DORECA_ANALYSIS.md.
+ */
+@theme {
+  /* ============================================================
+   * DORECA PALETTE — white background + warm mustard/gold accent.
+   * (Rebrand from the earlier bordeaux identity; no wine-red remains.)
+   * These are the canonical Doreca tokens named per the brief.
+   * ============================================================ */
+  /* ============================================================
+   * CANNABILLA PALETTE — warm botanical: cream ground, deep hemp
+   * green as the brand colour, warm honey-gold as the commerce accent
+   * (CTAs, prices, offers). Natural cosmetics from the Sibillini Mts.
+   * ============================================================ */
+  --color-bg: #faf7f0;            /* warm cream — page background              */
+  --color-surface: #f2ede1;       /* deeper sand — footer/hover/utility        */
+  --color-text: #23281f;          /* warm green-charcoal — text (never black)  */
+  --color-text-muted: #6d7264;    /* muted sage — secondary text, meta         */
+  --color-primary: #c79a3e;       /* honey-gold — ALL CTAs/prices/offers       */
+  --color-primary-hover: #b0862f; /* darker honey on hover                     */
+  --color-yellow-banner: #e7d7a8; /* soft sand — banner block                  */
+  --color-accent-red: #b5603a;    /* terracotta — occasional accent only       */
+  --color-border: #e4dcc9;        /* warm sand card/section borders            */
+  --color-success: #3f7d54;       /* hemp green — verified badges              */
+
+  /* ---- Legacy token aliases ----
+   * The category/product/cart/search/home views reference these names; they are
+   * REPOINTED to the Cannabilla palette so every page reskins automatically. */
+  --color-wine: #2f5d3a;          /* brand HEMP GREEN (headings/nav/links)     */
+  --color-wine-deep: #234a2d;     /* darker green (dark bands)                 */
+  --color-wine-soft: #b0862f;     /* honey (sale-price emphasis)              */
+  --color-gold: #c79a3e;          /* == primary (CTAs, prices, badges)        */
+  --color-gold-deep: #b0862f;     /* == primary-hover                          */
+  --color-gold-soft: #e2c777;     /* light honey — rings, eyebrows             */
+  --color-cream: #faf7f0;         /* == bg (warm cream)                        */
+  --color-cream-deep: #f2ede1;    /* == surface (sand)                         */
+  --color-charcoal: #23281f;      /* == text                                   */
+  --color-charcoal-soft: #6d7264; /* == text-muted                             */
+  --color-line: #e4dcc9;          /* == border                                 */
+
+  /* Fonts — resolved from next/font CSS variables set on <html> */
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Display serif (Playfair) + accent serif (Cormorant) — variables are set on
+   * <html> via next/font, so these fall back gracefully. */
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-accent: var(--font-cormorant), Georgia, "Times New Roman", serif;
+
+  /* Shadows — warm neutral tones only (Doreca), never a pure-black shadow */
+  --shadow-wine: 0 8px 30px rgba(35, 40, 31, 0.07);
+  --shadow-wine-sm: 0 4px 16px rgba(35, 40, 31, 0.07);
+  --shadow-wine-lg: 0 24px 50px rgba(35, 40, 31, 0.12);
+  --shadow-gold-cta: 0 10px 28px -6px rgba(199, 154, 62, 0.25);
+  /* commerce-named aliases */
+  --shadow-card: 0 4px 16px rgba(35, 40, 31, 0.07);
+  --shadow-cta: 0 10px 28px -6px rgba(199, 154, 62, 0.25);
+}
+
+/* Named gradients used across the page (text + backgrounds). */
+:root {
+  --gradient-wine: linear-gradient(135deg, #234a2d 0%, #2f5d3a 55%, #4a7c59 100%);
+  --gradient-gold: linear-gradient(135deg, #b0862f 0%, #c79a3e 50%, #e2c777 100%);
+  --gradient-hero: linear-gradient(135deg, #234a2d 0%, #2f5d3a 60%, #4a7c59 100%);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enforce the brand body color globally — warm charcoal, never black. */
+  body {
+    color: #23281f;
+    font-weight: 400;
+    background-color: #faf7f0;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Every anchored section clears the sticky nav on smooth scroll. */
+  section {
+    scroll-margin-top: 80px;
+  }
+
+  ::selection {
+    background-color: #e2c777;
+    color: #23281f;
+  }
+
+  /* ---- Text-overflow safety net ----
+   * Headings wrap instead of overflowing their container. Italian compound
+   * words are ~20% longer than English, so they get a more aggressive break
+   * rule. Kept scoped to headings on purpose: a blanket `:lang(it) button`
+   * font-size override would shrink icon-only buttons and the carefully tuned
+   * demo CTAs, so per-component sizing is used there instead. */
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: break-word;
+  }
+  :lang(it) h1,
+  :lang(it) h2,
+  :lang(it) h3 {
+    overflow-wrap: anywhere;
+  }
+}
+
+@layer utilities {
+  /* ---- Gradient text ---- */
+  .text-gradient-hero,
+  .text-gradient-wine,
+  .text-gradient-gold {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .text-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+  .text-gradient-wine {
+    background-image: var(--gradient-wine);
+  }
+  .text-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+
+  /* ---- Gradient borders (padding-box trick keeps rounded corners) ---- */
+  .grad-border-gold {
+    border: 2px solid transparent;
+    border-radius: 1rem;
+    background-image: linear-gradient(#ffffff, #ffffff), var(--gradient-gold);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+  .grad-border-wine {
+    border: 2px solid transparent;
+    border-radius: 1rem;
+    background-image: linear-gradient(#ffffff, #ffffff), var(--gradient-wine);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+  }
+
+  /* ---- Section divider ---- */
+  .section-divider {
+    height: 1px;
+    width: 60%;
+    margin-inline: auto;
+    background-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #e8b923 50%,
+      transparent 100%
+    );
+    opacity: 0.4;
+  }
+
+  /* Subtle gold glow reserved for CTA areas only. */
+  .cta-glow {
+    box-shadow:
+      0 0 0 1px rgba(228, 199, 123, 0.5),
+      0 18px 60px rgba(192, 144, 47, 0.2);
+  }
+
+  /* Animated FAQ accordion: grid-template-rows 0fr -> 1fr for a buttery open. */
+  .accordion-grid {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accordion-grid[data-open="true"] {
+    grid-template-rows: 1fr;
+  }
+  .accordion-grid > .accordion-inner {
+    overflow: hidden;
+  }
+
+  /* ---- Continuous animations ---- */
+  .animate-blob {
+    animation: blobDrift 12s ease-in-out infinite;
+  }
+  .animate-blob-alt {
+    animation: blobDriftAlt 12s ease-in-out infinite;
+  }
+  .animate-glow-pulse {
+    animation: glowPulse 8s ease-in-out infinite;
+  }
+  .animate-shimmer {
+    animation: shimmerSweep 4s ease-in-out infinite;
+  }
+  .animate-breathe {
+    animation: breathe 2.4s ease-in-out infinite;
+  }
+  /* Blue "Experience Live Demo" CTA — slightly slower breathing than the green CTA. */
+  .animate-breathe-blue {
+    animation: breathe 2.8s ease-in-out infinite;
+  }
+  /* Dramatic "URGENT" badge — soft opacity pulse to draw the eye. */
+  .animate-urgent-pulse {
+    animation: urgentPulse 1.6s ease-in-out infinite;
+  }
+  .animate-marquee {
+    animation: marqueeScroll 60s linear infinite;
+  }
+  .animate-float-phone {
+    animation: floatPhone 4s ease-in-out infinite;
+  }
+  .animate-order-toast {
+    animation: orderToast 5s ease-in-out infinite;
+  }
+  .cta-ripple {
+    animation: ripple 600ms ease-out forwards;
+  }
+  /* One-time "tap me" affordance on the demo restaurant switcher (mobile). */
+  .animate-tap-hint {
+    animation: tapHint 1.4s ease-out 3;
+    opacity: 0;
+  }
+
+  /* ---- Curry & Spice motion utilities ---- */
+  /* Hide the scrollbar on horizontally-scrolling menu category tabs. */
+  .curry-no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .curry-no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Gentle bounce for the hero scroll-down indicator. */
+  .curry-scroll-bounce {
+    animation: curryScrollBounce 1.8s ease-in-out infinite;
+  }
+  /* CSS-only hero entrance — runs on load without waiting for JS/hydration, so
+   * the above-the-fold hero text paints fast (good LCP). Stagger via inline
+   * animation-delay. */
+  .curry-fade-up {
+    animation: curryFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Pure-CSS announcement ticker (mobile) — no JS interval overhead. The track
+   * holds two copies of the content and slides by -50% for a seamless loop. */
+  .curry-ticker {
+    animation: curryTicker 24s linear infinite;
+  }
+  /* Pure-CSS rotating-fade for the mobile announcement bar: four stacked items,
+   * each shown for a 4s slot of a 16s cycle via staggered animation-delay.
+   * `backwards` fill keeps items hidden (0% keyframe) during their delay so they
+   * don't all show stacked at load. */
+  .curry-rotate-item {
+    opacity: 0;
+    animation: curryAnnounceRotate 16s ease-in-out infinite backwards;
+  }
+  /* Rotating fade tuned for exactly 3 announcement items (each visible for a
+   * third of the 12s cycle; stagger via inline animation-delay 0/4/8s). */
+  .enoteca-rotate-3 {
+    opacity: 0;
+    animation: enotecaRotate3 12s ease-in-out infinite backwards;
+  }
+  /* Pulsing gold glow ring on the floating WhatsApp button. */
+  .enoteca-wa-glow {
+    animation: enotecaWaGlow 2.6s ease-in-out infinite;
+  }
+  /* "Bella is typing…" bouncing dots (stagger via inline animation-delay). */
+  .curry-typing-dot {
+    animation: curryTyping 1.2s ease-in-out infinite;
+  }
+  /* Gentle upward bounce for the "tap a star" hint arrow. */
+  .curry-bounce-up {
+    animation: curryBounceUp 1.6s ease-in-out infinite;
+  }
+}
+
+@keyframes curryBounceUp {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+@keyframes enotecaRotate3 {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  2% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  33% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes enotecaWaGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 26px -6px rgba(18, 140, 74, 0.5),
+      0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 12px 32px -4px rgba(18, 140, 74, 0.6),
+      0 0 0 12px rgba(37, 211, 102, 0);
+  }
+}
+
+@keyframes curryAnnounceRotate {
+  0% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  3% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  22% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes curryBellaGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 10px 26px -6px rgba(199, 64, 26, 0.55),
+      0 0 0 0 rgba(232, 165, 72, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 12px 32px -4px rgba(199, 64, 26, 0.7),
+      0 0 0 12px rgba(232, 165, 72, 0);
+  }
+}
+
+@keyframes curryTyping {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes curryTicker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes curryFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes curryScrollBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.4;
+  }
+}
+
+@keyframes tapHint {
+  0% {
+    opacity: 0.7;
+    transform: translateY(-50%) scale(1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: translateY(-50%) scale(1.7);
+  }
+}
+
+@keyframes blobDrift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, 15px);
+  }
+}
+@keyframes blobDriftAlt {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, -15px);
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.18;
+  }
+}
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  60%,
+  100% {
+    transform: translateX(260%) skewX(-20deg);
+  }
+}
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+@keyframes floatPhone {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes orderToast {
+  0% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+  6% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  22% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  30%,
+  100% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+@keyframes urgentPulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-blob,
+  .animate-blob-alt,
+  .animate-glow-pulse,
+  .animate-shimmer,
+  .animate-breathe,
+  .animate-breathe-blue,
+  .animate-urgent-pulse,
+  .animate-marquee,
+  .animate-float-phone,
+  .animate-order-toast,
+  .animate-tap-hint,
+  .curry-scroll-bounce,
+  .curry-fade-up,
+  .curry-ticker,
+  .curry-rotate-item,
+  .curry-bella-glow,
+  .curry-typing-dot,
+  .curry-bounce-up,
+  .enoteca-rotate-3,
+  .enoteca-wa-glow {
+    animation: none !important;
+  }
+  /* With motion reduced, keep only the first announcement item visible. */
+  .curry-rotate-item,
+  .enoteca-rotate-3 {
+    opacity: 0;
+  }
+  .curry-rotate-item:first-child,
+  .enoteca-rotate-3:first-child {
+    opacity: 1;
+  }
+}
