@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { SHOP_INFO } from "@/lib/constants";
 
 /* ------------------------------------------------------------------ *
  * Cannabilla — stato del persona "Giulia" (consulente AI, soft gate).
@@ -68,9 +69,6 @@ const LOCAL_KEY = "cannabilla_giulia_v2";
 const MAX_USER_MESSAGES = 20;
 const DAY = 864e5;
 
-const WHATSAPP_MEDICAL =
-  "Ciao Cannabilla! Vorrei una consulenza personalizzata con un esperto.";
-
 /** Parole che segnalano una richiesta medica → reindirizzo dermatologo. */
 const MEDICAL_RE =
   /\b(acne|dermatit\w*|psorias\w*|eczem\w*|rosace\w*|melanom\w*|tumor\w*|allerg\w*|infezion\w*|micosi|herpes|verruc\w*|neo\b|nei\b|diagnos\w*|malatt\w*|patolog\w*|cortison\w*|antibiotic\w*|cura(re)?\b|guarir\w*|curare|terap\w*)/i;
@@ -108,17 +106,16 @@ const TEASER_GREETING = "Ciao! Sono Giulia 🌿 Come ti chiami?";
 // Visitatrice di ritorno (nome già noto da localStorage): salta la domanda del nome.
 const TEASER_GREETING_RETURNING = (name: string) =>
   `Bentornata ${name}! Sono di nuovo qui 🌿 Come posso aiutarti oggi?`;
-const TEASER_GREETING_FALLBACK =
-  "Ciao! Sono Giulia. Il consulente AI arriverà presto — scrivimi su WhatsApp per un consiglio.";
 
-/** Saluto iniziale in base a: AI disponibile? nome già noto? */
-function buildGreeting(name: string | null, aiEnabled: boolean): string {
-  if (!aiEnabled) return TEASER_GREETING_FALLBACK;
+/** Saluto iniziale: personalizzato se il nome è già noto, altrimenti chiede il nome.
+ *  Nessun controllo della chiave lato client — Giulia si assume sempre attiva. */
+function buildGreeting(name: string | null): string {
   return name ? TEASER_GREETING_RETURNING(name) : TEASER_GREETING;
 }
 const NAME_RETRY = "Dimmi solo il tuo nome, così posso essere più utile 😊";
+// Guardia medica: nessun bottone WhatsApp, ma il numero è citato in modo naturale.
 const MEDICAL_REPLY = (name: string) =>
-  `Questa è una domanda importante${name ? `, ${name}` : ""}, ma non sono qualificata per dare consigli medici. Ti consiglio di consultare un dermatologo. Se vuoi, posso metterti in contatto con il nostro esperto Cannabilla su WhatsApp — è disponibile per una consulenza personalizzata.`;
+  `Questa è una domanda importante${name ? `, ${name}` : ""}, ma non sono qualificata per dare consigli medici. Ti consiglio di consultare un dermatologo. Se vuoi un consulto personalizzato con il nostro esperto Cannabilla, puoi scrivere su WhatsApp al ${SHOP_INFO.whatsapp.display}.`;
 
 function greetWithName(name: string): string {
   return `Piacere di conoscerti, ${name}! Sono qui per aiutarti a trovare i prodotti Cannabilla giusti per te. Cosa posso fare per te oggi? Cerchi un consiglio per la tua pelle, un prodotto specifico, o vuoi conoscere meglio la nostra filosofia dai Monti Sibillini?`;
@@ -126,7 +123,6 @@ function greetWithName(name: string): string {
 
 interface GiuliaContextValue {
   ready: boolean;
-  aiEnabled: boolean;
   isOpen: boolean;
   isStreaming: boolean;
   capReached: boolean;
@@ -144,14 +140,12 @@ interface GiuliaContextValue {
   sendMessage: (text: string) => void;
   submitEmail: (email: string) => Promise<boolean>;
   declineOffer: () => void;
-  whatsappMessage: string;
 }
 
 const GiuliaContext = createContext<GiuliaContextValue | null>(null);
 
 export function GiuliaProvider({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
-  const [aiEnabled, setAiEnabled] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
 
@@ -177,10 +171,12 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
   const askedNameRef = useRef(false);
   const userMsgCountRef = useRef(0);
 
-  /* ---- hydrate + detect API availability ----
+  /* ---- hydrate ----
      Ripristina SOLO il sottoinsieme locale (nome/email/consenso/widget-hide).
      I messaggi e la dismissal del teaser NON vengono ripristinati: a ogni reload
-     la conversazione riparte da zero e il popup ricompare a 5s. */
+     la conversazione riparte da zero e il popup ricompare a 5s.
+     NB: nessun probe della chiave lato client — la disponibilità dell'AI è decisa
+     esclusivamente da /api/chat (server). Giulia si mostra sempre ottimisticamente. */
   useEffect(() => {
     try {
       const raw = localStorage.getItem(LOCAL_KEY);
@@ -204,19 +200,6 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
       hydrated.current = true;
       setReady(true);
     }
-
-    let cancelled = false;
-    fetch("/api/chat", { method: "GET" })
-      .then((r) => (r.ok ? r.json() : { enabled: false }))
-      .then((d: { enabled?: boolean }) => {
-        if (!cancelled) setAiEnabled(Boolean(d.enabled));
-      })
-      .catch(() => {
-        if (!cancelled) setAiEnabled(false);
-      });
-    return () => {
-      cancelled = true;
-    };
   }, []);
 
   /* ---- persist ---- Aggiorna lo stato in memoria e scrive in localStorage
@@ -251,7 +234,7 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
     if (!dismissedWidgetAt) return false;
     return Date.now() - new Date(dismissedWidgetAt).getTime() < 7 * DAY;
   })();
-  const teaserText = buildGreeting(name, aiEnabled);
+  const teaserText = buildGreeting(name);
 
   const openChat = useCallback(() => {
     setIsOpen(true);
@@ -262,13 +245,12 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
         {
           id: uid(),
           role: "assistant",
-          content: buildGreeting(stateRef.current.name, aiEnabled),
+          content: buildGreeting(stateRef.current.name),
           ts: nowIso(),
-          fallback: !aiEnabled,
         },
       ];
     });
-  }, [aiEnabled]);
+  }, []);
 
   const closeChat = useCallback(() => setIsOpen(false), []);
 
@@ -301,8 +283,7 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
       const fallback = () =>
         patchAssistant((m) => ({
           ...m,
-          content:
-            "Il consulente AI non è raggiungibile in questo momento. Scrivimi su WhatsApp e ti rispondo subito 🌿",
+          content: `Un momento, sto tornando… In questo momento non riesco a rispondere 🌿 Riprova tra poco, oppure scrivimi su WhatsApp al ${SHOP_INFO.whatsapp.display}.`,
           streaming: false,
           fallback: true,
         }));
@@ -420,8 +401,7 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
           {
             id: uid(),
             role: "assistant",
-            content:
-              "Abbiamo chiacchierato parecchio! Per continuare, scrivimi su WhatsApp — il team Cannabilla è felice di aiutarti 🌿",
+            content: `Abbiamo chiacchierato parecchio! Per continuare, scrivimi su WhatsApp al ${SHOP_INFO.whatsapp.display} — il team Cannabilla è felice di aiutarti 🌿`,
             ts: nowIso(),
             fallback: true,
           },
@@ -433,26 +413,11 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
       persist({ turnCount });
 
       // Soft offer appears on the 2nd real question, once.
-      const offer = turnCount === 2 && !stateRef.current.emailOfferShown && aiEnabled;
-
-      if (!aiEnabled) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: uid(),
-            role: "assistant",
-            content:
-              "Il consulente AI arriverà presto! Nel frattempo scrivimi su WhatsApp e ti do subito un consiglio personalizzato 🌿",
-            ts: nowIso(),
-            fallback: true,
-          },
-        ]);
-        return;
-      }
+      const offer = turnCount === 2 && !stateRef.current.emailOfferShown;
 
       void runApiTurn(baseHistory, currentName, turnCount, offer);
     },
-    [aiEnabled, isStreaming, persist, runApiTurn],
+    [isStreaming, persist, runApiTurn],
   );
 
   /* ---- soft email offer ---- */
@@ -498,7 +463,6 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
 
   const value: GiuliaContextValue = {
     ready,
-    aiEnabled,
     isOpen,
     isStreaming,
     capReached,
@@ -516,7 +480,6 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
     sendMessage,
     submitEmail,
     declineOffer,
-    whatsappMessage: WHATSAPP_MEDICAL,
   };
 
   return <GiuliaContext.Provider value={value}>{children}</GiuliaContext.Provider>;

@@ -6,9 +6,10 @@ import { buildGiuliaSystemPrompt } from "@/lib/chat-context";
  *
  * POST { messages: {role: "user"|"assistant", content: string}[] }
  *
- * - Se ANTHROPIC_API_KEY non è impostata (caso di default in questa preview),
- *   risponde 200 con { fallback: true } così la UI mostra subito il fallback
- *   WhatsApp, senza alcuna chiamata esterna.
+ * La presenza della chiave è verificata ESCLUSIVAMENTE qui (server). Il client
+ * non controlla mai la chiave: mostra ottimisticamente la chat e degrada solo
+ * se questa route restituisce un errore.
+ * - Se ANTHROPIC_API_KEY non è impostata → 503 { error: "api_unavailable" }.
  * - Se la chiave è presente, esegue lo streaming SSE da Claude via fetch grezza
  *   (nessun SDK) e inoltra al client i soli text delta come testo semplice.
  * - Qualsiasi errore a monte (rete, HTTP non-2xx, corpo mancante) prima che lo
@@ -17,6 +18,8 @@ import { buildGiuliaSystemPrompt } from "@/lib/chat-context";
  */
 
 export const runtime = "nodejs";
+// Mai prerenderizzata/cache-ata: la chiave va letta a runtime, non al build.
+export const dynamic = "force-dynamic";
 
 const MODEL = "claude-haiku-4-5-20251001";
 const ANTHROPIC_MESSAGES_URL = "https://api.anthropic.com/v1/messages";
@@ -34,18 +37,13 @@ function isIncomingMessage(value: unknown): value is IncomingMessage {
   return (v.role === "user" || v.role === "assistant") && typeof v.content === "string";
 }
 
-/** GET — usato dal client per sapere se il consulente AI è attivo (chiave presente). */
-export function GET() {
-  return NextResponse.json({ enabled: Boolean(process.env.ANTHROPIC_API_KEY) });
-}
-
 export async function POST(req: NextRequest) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
 
-  // Nessuna chiave configurata: percorso di fallback (comportamento di default
-  // in questa preview). Nessuna chiamata esterna viene effettuata.
+  // Nessuna chiave configurata: 503. Il client mostra un messaggio inline
+  // gentile (nessuna chiamata esterna viene effettuata).
   if (!apiKey) {
-    return NextResponse.json({ fallback: true });
+    return NextResponse.json({ error: "api_unavailable" }, { status: 503 });
   }
 
   let messages: IncomingMessage[];

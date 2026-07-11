@@ -4,14 +4,12 @@ import Image from "next/image";
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import { X, Send } from "lucide-react";
 import { GIULIA } from "@/lib/giulia-assets";
-import { getWhatsAppUrl } from "@/lib/constants";
 import { useGiulia } from "@/lib/giulia-context";
 import { GiuliaMessage } from "./GiuliaMessage";
 
 /** Drawer chat a tutta altezza — 420px desktop, schermo intero mobile. */
 export function GiuliaDrawer() {
-  const { isOpen, closeChat, messages, sendMessage, isStreaming, capReached, whatsappMessage } =
-    useGiulia();
+  const { isOpen, closeChat, messages, sendMessage, isStreaming, capReached } = useGiulia();
   const [entered, setEntered] = useState(false);
   const [input, setInput] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -121,17 +119,6 @@ export function GiuliaDrawer() {
               <Send size={18} />
             </button>
           </div>
-          <p className="mt-2 text-center text-[11px] text-text-muted">
-            Preferisci parlare con un esperto?{" "}
-            <a
-              href={getWhatsAppUrl(whatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-primary underline underline-offset-2"
-            >
-              Scrivi su WhatsApp
-            </a>
-          </p>
         </form>
       </div>
     </div>

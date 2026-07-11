@@ -1,8 +1,6 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
-import { getWhatsAppUrl } from "@/lib/constants";
-import { useGiulia, type GiuliaMessage as Msg } from "@/lib/giulia-context";
+import { type GiuliaMessage as Msg } from "@/lib/giulia-context";
 import { EmailSoftOffer } from "./EmailSoftOffer";
 
 function timeLabel(ts: string): string {
@@ -15,8 +13,6 @@ function timeLabel(ts: string): string {
 
 /** Bolla messaggio — assistente (sinistra, bianca) / utente (destra, verde .on-dark). */
 export function GiuliaMessage({ message }: { message: Msg }) {
-  const { whatsappMessage } = useGiulia();
-
   if (message.role === "user") {
     return (
       <div className="group flex flex-col items-end">
@@ -45,27 +41,8 @@ export function GiuliaMessage({ message }: { message: Msg }) {
           <span className="whitespace-pre-wrap">{message.content}</span>
         )}
 
-        {message.medical && (
-          <a
-            href={getWhatsAppUrl(whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 text-sm font-semibold text-white shadow transition-transform hover:scale-[1.02]"
-          >
-            <MessageCircle size={16} /> Scrivi all&apos;esperto su WhatsApp
-          </a>
-        )}
-
-        {message.fallback && !message.medical && (
-          <a
-            href={getWhatsAppUrl(whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 text-sm font-semibold text-white shadow transition-transform hover:scale-[1.02]"
-          >
-            <MessageCircle size={16} /> Scrivi su WhatsApp
-          </a>
-        )}
+        {/* Nessun bottone WhatsApp dentro la UI di Giulia: per casi medici/fallback
+            il numero è citato in modo naturale nel testo del messaggio. */}
 
         {message.showOffer && <EmailSoftOffer />}
       </div>

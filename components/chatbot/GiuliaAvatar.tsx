@@ -7,7 +7,8 @@ import { GIULIA } from "@/lib/giulia-assets";
 import { useGiulia } from "@/lib/giulia-context";
 
 /**
- * Avatar persistente in basso a destra (sopra il pulsante WhatsApp, mai sovrapposto).
+ * Avatar persistente in basso a destra — entry point PRIMARIO (ancorato in fondo).
+ * L'icona WhatsApp secondaria (44px) galleggia sopra di lui con ~12px di gap.
  * Alone pulsante sottile, pallino "online", nascosto su hover mostra la × per
  * nascondere il widget 7 giorni. Su ≤640px si rimpicciolisce (56px).
  */
@@ -19,7 +20,7 @@ export function GiuliaAvatar() {
 
   return (
     <div
-      className="fixed bottom-24 right-5 z-40"
+      className="fixed bottom-5 right-5 z-40"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

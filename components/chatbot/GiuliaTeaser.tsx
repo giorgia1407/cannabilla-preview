@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useState, type FormEvent } from "react";
-import { X, Send, MessageCircle } from "lucide-react";
+import { X, Send } from "lucide-react";
 import { GIULIA } from "@/lib/giulia-assets";
-import { getWhatsAppUrl } from "@/lib/constants";
 import { useGiulia } from "@/lib/giulia-context";
 
 /**
@@ -17,14 +16,12 @@ export function GiuliaTeaser() {
   const {
     showTeaser,
     isOpen,
-    aiEnabled,
     name,
     openChat,
     sendMessage,
     dismissTeaser,
     markTeaserSeen,
     teaserText,
-    whatsappMessage,
   } = useGiulia();
   const [mounted, setMounted] = useState(false);
   const [input, setInput] = useState("");
@@ -102,47 +99,23 @@ export function GiuliaTeaser() {
             </div>
           </button>
 
-          {aiEnabled ? (
-            <>
-              <form onSubmit={handleSubmit} className="mt-2.5 flex items-center gap-2">
-                <input
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder={placeholder}
-                  aria-label={returning ? "La tua domanda" : "Il tuo nome"}
-                  className="h-10 min-w-0 flex-1 rounded-full border border-border bg-cream px-4 text-base text-text outline-none placeholder:text-text-muted focus:border-primary"
-                />
-                <button
-                  type="submit"
-                  aria-label="Invia"
-                  className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary text-white transition-colors hover:bg-primary-dark"
-                >
-                  <Send size={17} />
-                </button>
-              </form>
-              <p className="mt-1.5 text-center text-[11px] text-text-muted">
-                Preferisci{" "}
-                <a
-                  href={getWhatsAppUrl(whatsappMessage)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-primary underline underline-offset-2"
-                >
-                  WhatsApp
-                </a>
-                ?
-              </p>
-            </>
-          ) : (
-            <a
-              href={getWhatsAppUrl(whatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-2.5 flex h-10 items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 text-sm font-semibold text-white shadow transition-transform hover:scale-[1.02]"
+          {/* Solo saluto + campo input: nessun entry point WhatsApp dentro Giulia. */}
+          <form onSubmit={handleSubmit} className="mt-2.5 flex items-center gap-2">
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={placeholder}
+              aria-label={returning ? "La tua domanda" : "Il tuo nome"}
+              className="h-10 min-w-0 flex-1 rounded-full border border-border bg-cream px-4 text-base text-text outline-none placeholder:text-text-muted focus:border-primary"
+            />
+            <button
+              type="submit"
+              aria-label="Invia"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary text-white transition-colors hover:bg-primary-dark"
             >
-              <MessageCircle size={16} /> Scrivi su WhatsApp
-            </a>
-          )}
+              <Send size={17} />
+            </button>
+          </form>
         </div>
       </div>
     </div>
