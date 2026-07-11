@@ -7,8 +7,8 @@
  * posizionamento e scrim propri, calibrati sulla composizione della foto.
  */
 
-export type DesktopTextPos = "left-center" | "right-center";
-export type MobileTextPos = "bottom-center";
+export type DesktopTextPos = "left-center" | "right-center" | "center";
+export type MobileTextPos = "bottom-center" | "center";
 export interface HeroCta {
   label: string;
   href: string;
@@ -39,6 +39,8 @@ export interface HeroSlide {
   scrimGradient: { desktop: string; mobile: string } | null;
   /** object-position per mantenere il soggetto in frame (Option A). */
   objectPosition: { desktop: string; mobile: string };
+  /** "minimal" → singola riga corsivo centrata (nessun altro elemento). */
+  textScale?: "minimal";
 }
 
 const D1_BLUR =
@@ -60,14 +62,15 @@ const M4_BLUR =
 
 export const HERO_SLIDES: HeroSlide[] = [
   {
-    // Slide 1 — collage crema viso: SOLA IMMAGINE, nessun testo/scrim.
+    // Slide 1 — collage crema viso: singola riga corsivo MINIMAL, centrata.
     id: 1,
     eyebrow: null,
-    headline: null,
+    headline: "Cosmesi Naturale Italiana",
     subheadline: null,
     primaryCta: null,
     secondaryCta: null,
     trustLine: null,
+    textScale: "minimal",
     alt: "Donne che applicano cosmetici naturali alla canapa Cannabilla",
     desktopImage: "/hero/hero-desktop-1-2400.webp",
     desktopFallback: "/hero/hero-desktop-1-1600.webp",
@@ -75,8 +78,13 @@ export const HERO_SLIDES: HeroSlide[] = [
     mobileImage: "/hero/hero-mobile-1-1080.webp",
     mobileFallback: "/hero/hero-mobile-1-720.webp",
     mobileBlur: M1_BLUR,
-    textPosition: null,
-    scrimGradient: null,
+    textPosition: { desktop: "center", mobile: "center" },
+    scrimGradient: {
+      desktop:
+        "radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 40%, transparent 70%)",
+      mobile:
+        "radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 45%, transparent 75%)",
+    },
     objectPosition: { desktop: "center center", mobile: "center center" },
   },
   {
@@ -142,10 +150,10 @@ export const HERO_SLIDES: HeroSlide[] = [
     mobileImage: "/hero/hero-mobile-4-1080.webp",
     mobileFallback: "/hero/hero-mobile-4-720.webp",
     mobileBlur: M4_BLUR,
-    textPosition: { desktop: "right-center", mobile: "bottom-center" },
+    textPosition: { desktop: "left-center", mobile: "bottom-center" },
     scrimGradient: {
-      desktop: "linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, transparent 70%)",
-      mobile: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 55%, transparent 90%)",
+      desktop: "linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 30%, transparent 55%)",
+      mobile: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.25) 50%, transparent 85%)",
     },
     objectPosition: { desktop: "center center", mobile: "center center" },
   },

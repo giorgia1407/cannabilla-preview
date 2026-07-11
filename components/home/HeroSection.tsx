@@ -15,6 +15,9 @@ const TEXTPOS: Record<DesktopTextPos, string> = {
     "bottom-6 left-1/2 -translate-x-1/2 text-center md:bottom-auto md:left-20 md:right-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2 md:text-left",
   "right-center":
     "bottom-6 left-1/2 -translate-x-1/2 text-center md:bottom-auto md:left-auto md:right-20 md:top-1/2 md:translate-x-0 md:-translate-y-1/2 md:text-right",
+  // "center" è gestito dal ramo "minimal" (riga singola centrata); voce presente
+  // solo per completezza del Record.
+  center: "inset-0 flex items-center justify-center text-center",
 };
 
 export function HeroSection() {
@@ -130,8 +133,25 @@ export function HeroSection() {
               </>
             )}
 
-            {/* Blocco testo per-slide (assente sulle slide senza headline) */}
-            {s.textPosition && s.headline && (
+            {/* Slide minimal: singola riga corsivo, centrata, nient'altro */}
+            {s.textScale === "minimal" && s.headline && (
+              <div className="absolute inset-0 z-[1] flex items-center justify-center p-6">
+                <h1
+                  className="max-w-[90vw] break-words text-center font-accent text-[22px] font-light italic md:text-[28px]"
+                  style={{
+                    color: "#FFFFFF",
+                    textShadow: "0 2px 20px rgba(0,0,0,0.5)",
+                    lineHeight: 1.3,
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {s.headline}
+                </h1>
+              </div>
+            )}
+
+            {/* Blocco testo per-slide (assente sulle slide senza headline o minimal) */}
+            {s.textScale !== "minimal" && s.textPosition && s.headline && (
               <div
                 className={`absolute z-[1] w-[90vw] max-w-[560px] md:w-auto md:max-w-[640px] ${TEXTPOS[s.textPosition.desktop]} on-dark`}
                 style={{ textShadow: "0 2px 12px rgba(0,0,0,0.45)" }}
