@@ -133,9 +133,10 @@ export function HeroSection() {
               </>
             )}
 
-            {/* Slide minimal: singola riga corsivo, centrata, nient'altro */}
+            {/* Slide minimal: singola riga corsivo centrata + un solo CTA "inverse"
+                (fill bianco, testo verde), 24px sotto il titolo. */}
             {s.textScale === "minimal" && s.headline && (
-              <div className="absolute inset-0 z-[1] flex items-center justify-center p-6">
+              <div className="absolute inset-0 z-[1] flex flex-col items-center justify-center gap-6 p-6">
                 <h1
                   className="max-w-[90vw] break-words text-center font-accent text-[22px] font-light italic md:text-[28px]"
                   style={{
@@ -147,6 +148,16 @@ export function HeroSection() {
                 >
                   {s.headline}
                 </h1>
+                {s.primaryCta && (
+                  <a
+                    href={s.primaryCta.href}
+                    tabIndex={isActive ? 0 : -1}
+                    className="rounded-[4px] bg-white px-8 py-[14px] text-[14px] font-semibold uppercase tracking-[0.08em] text-[#2D5F2B] transition-[background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-[#F8F6F0] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#b8935b] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    style={{ boxShadow: "0 2px 14px rgba(0,0,0,0.25)" }}
+                  >
+                    {s.primaryCta.label}
+                  </a>
+                )}
               </div>
             )}
 

@@ -58,8 +58,10 @@ export default function HomePage() {
       {/* 4 — TRUST MARQUEE */}
       <TrustMarquee />
 
-      {/* 5 — BEST SELLERS (2 rows × 4) */}
-      <section className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6">
+      {/* 5 — BEST SELLERS (2 rows × 4) — target ancora #bestsellers (CTA slide 1).
+          scroll-mt compensa l'header sticky (h-[76px]) così il titolo non finisce
+          sotto la barra durante lo scroll fluido. */}
+      <section id="bestsellers" className="mx-auto max-w-[1400px] scroll-mt-[92px] px-4 py-16 sm:px-6">
         <Reveal>
           <SectionHeading
             eyebrow="I più amati"

@@ -67,7 +67,9 @@ export const HERO_SLIDES: HeroSlide[] = [
     eyebrow: null,
     headline: "Cosmesi Naturale Italiana",
     subheadline: null,
-    primaryCta: null,
+    // In-page anchor verso la sezione Best Seller (stile "inverse" gestito nel
+    // ramo minimal di HeroSection: fill bianco + testo verde).
+    primaryCta: { label: "SCOPRI LA NOSTRA COLLEZIONE", href: "#bestsellers" },
     secondaryCta: null,
     trustLine: null,
     textScale: "minimal",
