@@ -280,13 +280,18 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
       const patchAssistant = (u: (m: GiuliaMessage) => GiuliaMessage) =>
         setMessages((prev) => prev.map((m) => (m.id === assistantId ? u(m) : m)));
 
-      const fallback = () =>
-        patchAssistant((m) => ({
-          ...m,
-          content: `Un momento, sto tornando… In questo momento non riesco a rispondere 🌿 Riprova tra poco, oppure scrivimi su WhatsApp al ${SHOP_INFO.whatsapp.display}.`,
-          streaming: false,
-          fallback: true,
-        }));
+      // Messaggio di degrado, differenziato in base al tipo d'errore riportato
+      // dalla route. In tutti i casi resta caloroso e indirizza a WhatsApp.
+      const fallback = (errorType?: string) => {
+        const wa = SHOP_INFO.whatsapp.display;
+        let content = `Un momento, sto tornando… In questo momento non riesco a rispondere 🌿 Riprova tra poco, oppure scrivimi su WhatsApp al ${wa}.`;
+        if (errorType === "rate_limit_error") {
+          content = `Un attimo, sto rispondendo a tante persone insieme 🌿 Riprova tra qualche secondo, oppure scrivimi su WhatsApp al ${wa}.`;
+        } else if (errorType === "credit_balance_too_low" || errorType === "api_unavailable") {
+          content = `Sto tornando presto 🌿 Nel frattempo, per un consiglio immediato scrivimi su WhatsApp al ${wa}.`;
+        }
+        patchAssistant((m) => ({ ...m, content, streaming: false, fallback: true }));
+      };
 
       try {
         const res = await fetch("/api/chat", {
@@ -302,7 +307,17 @@ export function GiuliaProvider({ children }: { children: ReactNode }) {
         });
         const ct = res.headers.get("content-type") ?? "";
         if (!res.ok || ct.includes("application/json") || !res.body) {
-          fallback();
+          // Prova a leggere il tipo d'errore per un messaggio più pertinente.
+          let errorType: string | undefined;
+          if (ct.includes("application/json")) {
+            try {
+              const data = (await res.json()) as { errorType?: string; error?: string };
+              errorType = data.errorType ?? data.error;
+            } catch {
+              /* corpo non leggibile — messaggio generico */
+            }
+          }
+          fallback(errorType);
           return;
         }
         const reader = res.body.getReader();
